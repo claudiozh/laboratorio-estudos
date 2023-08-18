@@ -1,6 +1,7 @@
 # Table of contents
 
-* [NodeJS](README.md)
+* [📖 Laboratório de estudos](README.md)
+* [NodeJS](<README (1).md>)
   * [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](nodejs/deploy-com-docker-e-prisma-para-servidor-remoto-sem-usar-registrador-de-imagens.md)
 * [NestJS](nestjs/README.md)
   * [Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
