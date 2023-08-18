@@ -1,8 +1,15 @@
 # Table of contents
 
-* [README](README.md)
-* [Documento de requisitos](documento-de-requisitos.md)
-
-## Laboratorio
-
-* [Estudos](laboratorio/estudos.md)
+* [NodeJS](README.md)
+  * [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](nodejs/deploy-com-docker-e-prisma-para-servidor-remoto-sem-usar-registrador-de-imagens.md)
+* [NestJS](nestjs/README.md)
+  * [Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
+  * [Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
+* [Docker](docker.md)
+* [Testes automatizados](testes-automatizados/README.md)
+  * [Por que fazer mock das datas usando testes](testes-automatizados/por-que-fazer-mock-das-datas-usando-testes.md)
+  * [Principais bibliotecas para fazer testes usando nodejs](testes-automatizados/principais-bibliotecas-para-fazer-testes-usando-nodejs.md)
+* [Linux](linux/README.md)
+  * [Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
+* [NextJS](nextjs/README.md)
+  * [Como usar React Toastify com NextJS V13](nextjs/como-usar-react-toastify-com-nextjs-v13.md)
