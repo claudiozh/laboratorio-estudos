@@ -1,3 +1,17 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # NextJS
 
 Next.js é um framework de desenvolvimento web de código aberto baseado em React.js. Ele é projetado para criar aplicativos React de página única (SPAs) e sites renderizados do lado do servidor (SSR) de maneira eficiente e fácil. O Next.js combina os benefícios do React com recursos avançados, como renderização do lado do servidor, pré-renderização estática e dinâmica, roteamento simplificado e suporte a APIs.

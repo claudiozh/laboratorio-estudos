@@ -1,6 +1,6 @@
 # Table of contents
 
-* [📖 Laboratório de estudos](README.md)
+* [Laboratório de estudos](README.md)
 * [NodeJS](<README (1).md>)
   * [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](nodejs/deploy-com-docker-e-prisma-para-servidor-remoto-sem-usar-registrador-de-imagens.md)
 * [NestJS](nestjs/README.md)

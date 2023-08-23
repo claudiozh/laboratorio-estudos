@@ -2,6 +2,17 @@
 description: >-
   Guia para atualizar dependências no NestJS: aprenda a instalar ferramentas,
   atualizar pacotes e manter seu projeto NestJS eficiente.
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # Guia de Atualização de Dependências no NestJS
