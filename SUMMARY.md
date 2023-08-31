@@ -6,6 +6,7 @@
 * [NestJS](nestjs/README.md)
   * [Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
   * [Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
+  * [Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 * [Docker](docker.md)
 * [Testes automatizados](testes-automatizados/README.md)
   * [Por que fazer mock das datas usando testes](testes-automatizados/por-que-fazer-mock-das-datas-usando-testes.md)
