@@ -15,3 +15,4 @@
   * [Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
 * [NextJS](nextjs/README.md)
   * [Como usar React Toastify com NextJS V13](nextjs/como-usar-react-toastify-com-nextjs-v13.md)
+* [Exemplo de SQL Injection](exemplo-de-sql-injection.md)
