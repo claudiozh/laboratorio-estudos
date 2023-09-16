@@ -43,7 +43,7 @@ GRANT USAGE ON SCHEMA "public" TO claudio;
 
 ### **Concedendo permissão de consultas**
 
-**Para uma tabela específica \[categorias]**
+Para uma tabela específica \[categorias]
 
 {% code overflow="wrap" %}
 ```plsql
@@ -51,7 +51,7 @@ GRANT SELECT ON categorias TO claudio;
 ```
 {% endcode %}
 
-**Para todas as tabelas de do schema \[public]**
+Para todas as tabelas de do schema \[public]
 
 {% code overflow="wrap" %}
 ```plsql
@@ -59,7 +59,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA "public" TO claudio;
 ```
 {% endcode %}
 
-**Se você deseja conceder acesso à nova tabela automaticamente no futuro, você deve alterar o padrão:**
+### **Se você deseja conceder acesso à nova tabela automaticamente no futuro, você deve alterar o padrão:**
 
 {% code overflow="wrap" %}
 ```plsql
