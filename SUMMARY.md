@@ -18,8 +18,9 @@
 
 ## Database
 
-* [Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04](database/como-instalar-e-utilizar-o-postgresql-no-ubuntu-20.04.md)
 * [Instalação Postgres](database/instalacao-postgres.md)
+* [Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04](database/como-instalar-e-utilizar-o-postgresql-no-ubuntu-20.04.md)
+* [Criando usuário readonly no postgres](database/criando-usuario-readonly-no-postgres.md)
 * [Backup e restauração no Postgres](database/backup-e-restauracao-no-postgres.md)
 * [Exemplo de SQL Injection](database/exemplo-de-sql-injection.md)
 * [Select para mostrar nome das tabelas que contêm determinada coluna](database/select-para-mostrar-nome-das-tabelas-que-contem-determinada-coluna.md)
