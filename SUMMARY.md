@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Laboratório de estudos](README.md)
+* [🚀 Sobre o projeto](README.md)
 
 ## NodeJS
 

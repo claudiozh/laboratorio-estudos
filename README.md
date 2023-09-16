@@ -17,6 +17,6 @@ layout:
     visible: true
 ---
 
-# Laboratório de estudos
+# 🚀 Sobre o projeto
 
 Meu Laboratório de estudos de programação é o lugar onde mergulho profundamente no mundo da codificação, exploro conceitos avançados e escrevo conteúdos educativos para compartilhar com a comunidade de desenvolvedores. É um espaço criativo e inspirador, onde minha paixão pela programação se manifesta em projetos e artigos.
