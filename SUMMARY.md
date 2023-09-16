@@ -30,6 +30,7 @@
 
 ## Linux
 
+* [Baixar arquivo sh do github e executar na máquina local](linux/baixar-arquivo-sh-do-github-e-executar-na-maquina-local.md)
 * [Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
 
 ## Testes automatizados
@@ -44,4 +45,5 @@
 ## Outros
 
 * [Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
+* [RabbitMQ](outros/rabbitmq.md)
 * [Regex](outros/regex.md)
