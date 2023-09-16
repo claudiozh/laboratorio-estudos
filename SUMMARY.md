@@ -39,6 +39,7 @@
 * [Baixar arquivo sh do github e executar na máquina local](linux/baixar-arquivo-sh-do-github-e-executar-na-maquina-local.md)
 * [Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
 * [Centralizar barra de aplicativos do Ubuntu](linux/centralizar-barra-de-aplicativos-do-ubuntu.md)
+* [Comandos linux](linux/comandos-linux.md)
 
 ## Testes automatizados
 
