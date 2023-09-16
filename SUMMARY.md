@@ -10,6 +10,10 @@
 * [Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
 * [Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 
+## Docker
+
+* [Dockerfile prod nestjs](docker/dockerfile-prod-nestjs.md)
+
 ## Database
 
 * [Exemplo de SQL Injection](database/exemplo-de-sql-injection.md)
