@@ -43,4 +43,5 @@
 
 ## Outros
 
+* [Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
 * [Regex](outros/regex.md)
