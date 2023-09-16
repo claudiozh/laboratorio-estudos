@@ -103,7 +103,7 @@ Entendemos o Conventional Commits, mas nada garante que vamos respeitar as regra
 
 Antes de fazermos um commit, vamos rodar a biblioteca para fazer essa verificação. Se a mensagem do commit não estiver seguindo o padrão, será gerado um erro no terminal.
 
-### ✨ Husky <a href="#husky" id="husky"></a>
+### Husky <a href="#husky" id="husky"></a>
 
 O Husky vai nos ajudar a criarmos ganchos para o Git de uma maneira simples. Os ganchos são ações que vão ser disparadas em determinados momentos. Nesse caso, vamos criar um gancho para ser disparado antes de um commit ser inicializado.
 
