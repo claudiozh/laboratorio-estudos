@@ -1,258 +1,118 @@
-# Deploy com docker e prisma para servidor remoto sem usar registrador de imagens
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
 
-Nesta abordagem de implantação, você aprenderá como fazer o deploy de uma aplicação utilizando Docker e Prisma em um servidor remoto, sem depender de um registrador de imagens.&#x20;
+# Como organizar e estruturar projetos com NodeJS
 
-Em vez disso, você utilizará o Docker para empacotar sua aplicação e todas as suas dependências, incluindo o Prisma, em um contêiner. Em seguida, você transferirá esse contêiner para o servidor remoto e o executará lá.
+No node temos muita liberdade para construir nossa API REST da forma que desejarmos, quem está começando não sabe ao certo como organizar.
 
-&#x20;Essa abordagem oferece flexibilidade e controle sobre o processo de implantação, permitindo que você implante sua aplicação de forma eficiente e confiável, mesmo sem um registro de imagens.&#x20;
+Talvez em projetos pequenos você não perceba os problemas que isso pode te causar, projetos maiores onde visa escalonar, provavelmente terá problemas com essa organização para manter o código com um alto acoplamento trazendo falta de reutilização de código, falta de estabilidade...
 
-Ao seguir este método, você poderá implantar facilmente sua aplicação Node.js, garantindo que o Prisma e todas as outras dependências estejam configuradas corretamente no servidor remoto.
+Por isso nesse artigo vamos falar sobre uma estrutura que irá ajudar a trazer uma melhor sustentabilidade e escalonabilidade para sua aplicação.
 
-## Crie seu arquivo de configurações para produção
+## Estrutura de pastas  <a href="#019d" id="019d"></a>
 
-Este é um arquivo de implantação em várias etapas, onde inicialmente uma máquina mais poderosa é criada para executar o processo de construção da aplicação. Em seguida, uma máquina mais leve é configurada exclusivamente para a criação da imagem Docker.
+> Lembrando que cada projeto tem suas peculiaridades, então basta você/equipe decidir o que é melhor para adicionar ou remover no seu projeto visando sempre o equilibrio entre agilidade e qualidade na entrega do produto.
 
-{% code title="src/Dockerfile.prod" overflow="wrap" fullWidth="false" %}
-```docker
+## Controllers e os fardos que elas carregam <a href="#f8ff" id="f8ff"></a>
 
-FROM node:18.16.0-alpine as builder
-# Estágio de construção da aplicação
+A prática de atribuir bastantes regras de negócio nos controllers express.js é de fácil visualização, pois na cabeça de quem está começando tudo é uma coisa só.
 
-ENV NODE_ENV build
-# Define a variável de ambiente NODE_ENV como "build" para o estágio atual
+E com isso uma controller que começou tendo _300 linhas_ de código com o passar do tempo ela pode ficar com mais de _1000 linhas_. Pois você estará implementando **querys builders, regras de negócios, chamada para serviços externos e muito mais…**
 
-WORKDIR /home/node/app
-# Define o diretório de trabalho dentro do contêiner como "/home/node/app"
+Com isso para _testar, reaproveitar código e dar manutenção_ que deveria ser um trabalho mais fácil acaba se tornando muito complicado.
 
-COPY . .
-# Copia todo o conteúdo do diretório local para o diretório de trabalho no contêiner
+<figure><img src="https://miro.medium.com/v2/resize:fit:560/1*qpELXZNQgMX63di9rZZ76Q.png" alt="" height="394" width="700"><figcaption></figcaption></figure>
 
-RUN npm ci && npm run build && npm prune --production
-# Executa os comandos npm no contêiner para instalar as dependências, executar o processo de construção e remover as dependências de desenvolvimento
+Acima segue um _exemplo ruim_ de uma controller onde atribuimos todas as responsabilidades em uma única camada, vamos adotar _princípio da **responsabilidade única do SOLID** para fazer a separação**.**_
 
-######## Start a new stage from scratch #######
+> “Uma classe deve ter **um**, **e apenas um**, motivo para ser modificada”
 
-FROM node:18.16.0-alpine
-# Novo estágio baseado em uma imagem Node.js vazia
+## Ao separar as controllers das regras de negócio o que ganhamos? <a href="#d6ab" id="d6ab"></a>
 
-ENV NODE_ENV production
-# Define a variável de ambiente NODE_ENV como "production" para o novo estágio
+Reutilização de código em outras classes, fazer testes únitarios e de integração ficará mais claro o que de fato você terá que testar em cada um, fácil manutenção já que iremos granularizar nossas responsabilidades…
 
-ENV TZ America/Fortaleza
-# Define a variável de ambiente TZ como "America/Fortaleza" para o fuso horário
+<figure><img src="https://miro.medium.com/v2/resize:fit:560/1*lCUJfaV5c8XShyte3qRFvQ.png" alt="" height="396" width="700"><figcaption></figcaption></figure>
 
-ENV PORT 3000
-# Define a variável de ambiente PORT como 3000 para a porta de execução da aplicação
+## **Controllers** <a href="#dc70" id="dc70"></a>
 
-WORKDIR /home/node/app
-# Define o diretório de trabalho dentro do contêiner como "/home/node/app"
+O controle deve se preocupar em aceitar a solicitação, repassar para o serviço de domínio correto processe a solicitação e entregue a resposta ao cliente.
 
-# Copia o arquivo binário pré-construído do estágio anterior
-COPY --from=builder /home/node/app/prisma ./prisma
-COPY --from=builder /home/node/app/dist ./dist
-COPY --from=builder /home/node/app/package.json .
-COPY --from=builder /home/node/app/package-lock.json .
-COPY --from=builder /home/node/app/node_modules/ /home/node/app/node_modules/
+## Services <a href="#1fda" id="1fda"></a>
 
-RUN apk add --no-cache ca-certificates tzdata && chown -R node:node /home/node/app
-# Executa os comandos apk no contêiner para adicionar certificados, configurar o fuso horário e atribuir permissões corretas para o diretório
+Essa camada é um design pattern que ajuda a abstrair suas regras de negócio, deixando sua controller mais limpa e com a responsabilidade única.
 
-USER node
-# Define o usuário do contêiner como "node"
+Um outro ponto importante que a medida que cresce sua aplicação você tende a reutilizar os códigos já implementados nesta camada. Imagine que você tem **três controllers** que faz uso de um service e você precisa alterar alguma parte do código, obviamente você vai utilizar **somente a função no service** para alterar, entretanto se não tivessemos essa camada? Teriamos sair procurando no nosso projeto **todos os lugares que faz o uso daquele trecho de código.**
 
-CMD [ "node", "dist/server" ]
-# Comando para executar o arquivo executável da aplicação
-```
-{% endcode %}
+Para fazer testes unitários será muito mais fácil, sem necessidade de fazer uma request a um endpoint.
 
-## Crie seu arquivo de omissão de conteúdo
+## Repositories <a href="#b050" id="b050"></a>
 
-Esse arquivo serve para informar ao docker o que deve ser ignorado na hora do build.
+Ter querys sql no código de uma service isso torna um código grande e ilegível, por isso atribuimos aos repositories o trabalho de ser uma camada de acesso e interação com as entidades do banco de dados.
 
-{% code title="src/.dockerignore" %}
-```bash
-/node_modules
-.github
-.docker
-deploy
-```
-{% endcode %}
+Temos dois pontos que podemos utilizar para falar da utilização de um repository, _**centralizar regras de recuperação e persistência de dados** e_\
+_**abstrair a utilização de ORMs possibilitando a troca por outros ORMs**,_ mas vamos falar a verdade é **muito dificil de um projeto ficar trocando de ORM**.
 
-## Crie um arquivo de deploy
+<figure><img src="https://miro.medium.com/v2/resize:fit:454/1*WpfYs-nYsbVZhpX4aZoFJA.png" alt="" height="412" width="568"><figcaption></figcaption></figure>
 
-Este arquivo contém comandos para executar a construção da imagem, juntamente com a adição da pasta "releases".
+> Vale ressaltar que no mundo ideal levariamos a risca o **S** de SOLID e com isso cada classe teria sua responsabilidade única, mas sabemos que não temos tanto tempo para fazer isso no dia-a-dia por isso nem sempre vai ser necessário ter uma classe no repo, pois o metodo utilizado pode ser somente um **findAll().** Isso vai da avaliação do programador para saber se é necessário a utilização dessa camada.
 
-{% code title="src/deploy/deploy.sh" %}
-```bash
+## Subscribers (Pub/Sub) <a href="#3b85" id="3b85"></a>
 
-#!/bin/bash
+Quando se tem uma aplicação onde ela utiliza serviços de terceiros e geralmente fazemos uso na camada de controller junto com a regras de negócio com o tempo a aplicação crescendo é muito provável que iremos acrescentar mais linhas de códigos de serviços externos.
 
-# Definir uma variavel local com o caminho absoluto do projeto
-APP_DIR=/home/claudio/projetos/app-nodejs
+Abordagem de utilizar um serviço de terceiro de forma imperativo não é a melhor opção para esse caso, por isso é bom trabalhar com eventos sendo emitidos para cada subscriber depois que uma ação for executada na camada da service.
 
-# Entra dentro da pasta principal do projeto
-cd $APP_DIR
+<figure><img src="https://miro.medium.com/v2/resize:fit:560/1*eCZUBWMA6Z_JDGcieVFt8w.png" alt="" height="396" width="700"><figcaption></figcaption></figure>
 
-# Criar a imagem local da aplicação
-docker build -f Dockerfile.prod -t claudiozh/app-nodejs:latest .
+## Jobs <a href="#d9e4" id="d9e4"></a>
 
-# Cria pasta releases dentro do diretório deploy
-mkdir -p deploy/realeses
+Essa camada é criada para armazenar tarefas agendadas que precisam ser feitas automaticamente em um certo intervalo de tempo. Como nossa regra de negócios está centralizada em um serviço isso facilita a utilização em um cron.
 
-# Salva a imagem na máquina local e cria um .zip da mesma
-docker save claudiozh/app-nodejs:latest | gzip > deploy/realeses/app-nodejs.tar.gz
-```
-{% endcode %}
+Devido a forma que o node funciona é melhor evitar a utilização de formas primitivas para agendar uma tarefa e com isso você ganha um controle melhor dos retornos da ação executada.
 
-<details>
+## Models <a href="#a7a2" id="a7a2"></a>
 
-<summary>Como executar o arquivo deploy.sh</summary>
+Determina a estrutura lógica que representa uma entidade do banco de dados e da forma na qual os dados podem ser manipulados e organizados.
 
-Acesse a pasta deploy
+## Database <a href="#a239" id="a239"></a>
 
-```bash
-cd deploy
-```
+Onde organizamos nossas **migrations** para que a equipe tenha o controle do versionamento do banco de dados e dos **seeders** para popular nosso banco com dados inserido pelo desenvolvedor, para mais informação sobre essa parte é só ir nesse artigo abaixo:
 
-Adicionar permissão de execução no arquivo
+[Migrations e Seeders no SequelizeJSVamos começar com um overviewmedium.com](https://medium.com/@diomalta/migrations-e-seeders-no-sequelizejs-67ba3571ed0e?source=post\_page-----4845be004899--------------------------------)
 
-```bash
-sudo chmod +x deploy.sh
-```
+## Utils <a href="#670d" id="670d"></a>
 
-Execute o arquivo sh
+Trechos de código pequeno que são utilizado por mais de uma classe. Funções que são utilizadas para auxiliar na construção de um código maior e podendo ser utilizado em qualquer parte das camadas aplicação, por exemplo um _helper_ pode utilizar mais de um _util_ para construir um código mais completo para uma finalidade especifica.
 
-```bash
-./deploy.sh
-```
-
-</details>
-
-{% hint style="info" %}
-Apos a execução do arquivo sua imagem ira ficar disponível dentro da sua pasta "releases".
-{% endhint %}
-
-## Como enviar sua imagem para o servidor remoto
-
-Após a disponibilidade da sua imagem, é necessário enviá-la para o servidor. Para otimizar o tráfego e garantir uma transferência eficiente, faremos a conversão da imagem para o formato .tar.gz.
-
-```bash
-docker save claudiozh/app-nodejs:latest | gzip > app-nodejs.tar.gz
-```
-
-Apos a conversão da imagem, iremos realizar o envio para o servidor via scp.
-
-> Entre dentro da pasta releases
->
-> ```bash
-> cd deploy/releases
-> ```
-
-Para fazer o envio execute o seguinte comando
-
-```bash
-scp app-nodejs.tar.gz USER_REMOTE@IP_REMOTE:
-```
-
-Caso ocorra tudo certo, sua imagem estará disponível na pasta raiz do seu servidor, e agora é necessário descompactar novamente o arquivo para uma imagem utilizável.
-
-```bash
-docker load --input app-nodejs.tar.gz
-```
-
-Com isso sua imagem já esta disponível para utilização no servidor remoto.&#x20;
-
-## Criando docker-compose.yml na máquina de produção e configurando servidor traefik
-
-Crie uma pasta com o nome do seu projeto
-
-```bash
-mkdir minha-aplicacao && cd minha-aplicacao
-```
-
-Agora crie um pasta para armazenar os certificados SSL da sua aplicação que serão gerados automaticamente pelo traefik
-
-```bash
-mkdir lets-encrypt
-```
-
-> Não é necessário criar a pasta com esse mesmo que tem no exemplo, porém caso mude o nome será necessário alterar no docker-compose.yml
-
-Crie o arquivo docker-compose.yml para realizar a orquestração dos seus contêineres, e mapear suas portas.
-
-{% code title="docker-compose.yml" %}
-```yaml
-
-version: "3"
-
-services:
-  
-  application:
-    image: claudiozh/app-nodejs:latest  # Imagem do contêiner da aplicação
-    container_name: app-nodejs  # Nome do contêiner
-    labels:  # Rótulos para configuração do Traefik
-      - "traefik.http.routers.my-api.rule=Host(`mydomain.com`)"  # Regra para roteamento do Traefik
-      - "traefik.http.services.my-api.loadbalancer.server.port=3000"  # Porta do serviço no contêiner
-      - "traefik.http.routers.my-api.tls=true"  # Habilitar TLS
-      - "traefik.http.routers.my-api.tls.certresolver=myresolver"  # Resolvedor de certificados
-    networks:
-      - my-network  # Nome da rede Docker
-    user: node  # Usuário do contêiner
-    env_file:
-      - .env  # Arquivo de variáveis de ambiente
-    expose:
-      - "3000"  # Porta exposta pela aplicação
-  
-  my-database:
-    image: my-database-image  # Imagem do contêiner do banco de dados
-    container_name: my-database  # Nome do contêiner
-    ports:
-      - 5432:5432  # Mapeamento de porta do host para o contêiner
-    env_file:
-      - .env  # Arquivo de variáveis de ambiente
-    volumes:
-      - data:/var/lib/postgres  # Volume para persistência de dados
-    networks:
-      - my-network  # Nome da rede Docker
-  
-  reverse-proxy:
-    image: traefik:v2.9  # Imagem do contêiner do proxy reverso
-    networks:
-      - my-network  # Nome da rede Docker
-    command:
-      - "--api.insecure=true"  # Habilitar API insegura do Traefik
-      - "--providers.docker"  # Provedor de configuração do Docker
-      - "--entrypoints.web.address=:80"  # Endereço do ponto de entrada HTTP
-      - "--entrypoints.websecure.address=:443"  # Endereço do ponto de entrada HTTPS
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"  # Redirecionamento de HTTP para HTTPS
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"  # Esquema de redirecionamento para HTTPS
-      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"  # Redirecionamento permanente
-      - "--certificatesresolvers.myresolver.acme.email=myemail@example.com"  # E-mail para registro no ACME
-      - "--certificatesresolvers.myresolver.acme.storage=/opt/lets-encrypt/acme.json"  # Armazenamento do ACME
-      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"  # Desafio HTTP para ACME
-    ports:
-      - "80:80"  # Mapeamento de porta HTTP
-      - "443:443"  # Mapeamento de porta HTTPS
-      - "8080:8080"  # Porta para painel de controle do Traefik
-    volumes:
-      - /PATH_PASTA_CRIADO_ARMAZENAR_CERTIFICADOS:/opt/lets-encrypt  # Volume para certificados
-      - /var/run/docker.sock:/var/run/docker.sock  # Compartilhamento do socket do Docker
-
-volumes:
-  data:  # Volume para persistência de dados do banco de dados
-
-networks:
-  my_network:  # Rede Docker para comunicação entre os contêineres
-    driver: bridgecompos
-```
-{% endcode %}
-
-
-
-## Explicando docker-compose.yml
-
-1. **application**: Este serviço representa a aplicação que você deseja executar em um contêiner. Ele usa uma imagem específica (claudiozh/app-nodejs:latest) e possui configurações para o Traefik, como rótulos para o roteamento, habilitação de TLS, etc.
-2. **my-database**: Este serviço representa o banco de dados que você deseja usar. Ele usa uma imagem específica (my-database-image) e possui configurações de porta, variáveis de ambiente para autenticação e um volume para persistência de dados.
-3. **reverse-proxy**: Este serviço é responsável por executar o proxy reverso Traefik. Ele lida com o roteamento de solicitações para a aplicação e lida com o SSL/TLS usando certificados emitidos pelo Let's Encrypt. Também possui um volume para armazenar os certificados e compartilha o socket do Docker para interagir com os contêineres.
-
-Este código genérico pode ser usado como ponto de partida para configurar seus serviços em um ambiente Docker com o Traefik como proxy reverso, facilitando o roteamento e a configuração de SSL/TLS para sua aplicação. Certifique-se de substituir as imagens, nomes de contêiner, variáveis de ambiente e outras configurações específicas de acordo com suas necessidades.
+## Helpers <a href="#96db" id="96db"></a>
+
+Trechos de arquitetura de código que contém apresentações lógicas que podem ser compartilhadas entre as camadas da aplicação contendo várias funções englobada para servir de bootstrap a outros componentes e ergonomia do desenvolvedor.
+
+## Constants <a href="#3519" id="3519"></a>
+
+A utilização das constantes strings são muito importantes para você poder centralizar uma palavra de retorno de error, sucesso, status HTTP, nome de uma entidade que se repete por várias partes do código pois na hora quando houver uma mudança de valor naquela constantes todas as partes que utilizarem vão ser alteradas sem a necessidade de ficar procurando em cada arquivo pelo projeto.
+
+## Config <a href="#97e1" id="97e1"></a>
+
+É onde vamos centralizar todas as nossas variáveis de ambiente e outras configurações que utilizaremos pela aplicação, como: acesso a banco de dados, chave secreta, email, testes e muito mais..
+
+É parecido com o problema que temos com as constantes, imagine termos _**process.env.JWT\_SECRET**_ espalhados em models, tests, controllers e quando você tiver que alterar o nome da variavel ou algo do tipo por conta que mudou a forma como você cria um token e sair atualizando e caçando cada arquivo para fazer a alteração.
+
+## Rotas <a href="#24e7" id="24e7"></a>
+
+Separamos as rotas das controllers, pois uma rota pode ter vários tipo de requisições (post, get, put, delete, option) e assim mantemos o código limpo.
+
+## Esse padrão é perfeito para qualquer projeto? <a href="#fb0c" id="fb0c"></a>
+
+Cada projeto é único e com isso temos que ter a flexibilidade para adequar com a necessidades que surgem, para essa organização já foi testada em produção correspondendo bem nos quesitos de escalabilidade e sustentabilidade do código e alinhando a agilidade com a qualidade na entrega dos resultados.
