@@ -26,3 +26,11 @@
 
 * [Por que fazer mock das datas usando testes](testes-automatizados/por-que-fazer-mock-das-datas-usando-testes.md)
 * [Principais bibliotecas para fazer testes usando nodejs](testes-automatizados/principais-bibliotecas-para-fazer-testes-usando-nodejs.md)
+
+## Github
+
+* [Alterar credencias globais do github](github/alterar-credencias-globais-do-github.md)
+
+## Outros
+
+* [Regex](outros/regex.md)
