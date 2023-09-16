@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Insert em uma tabela A, com dados de uma tabela B
+# ➕ Insert em uma tabela A, com dados de uma tabela B
 
 {% code overflow="wrap" %}
 ```plsql

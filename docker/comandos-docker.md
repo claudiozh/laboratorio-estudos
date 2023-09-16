@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Comandos docker
+# ⌨ Comandos docker
 
 ### **Comandos relacionados às informações**
 

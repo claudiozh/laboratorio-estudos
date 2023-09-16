@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Alterar credencias globais do github
+# 🆔 Alterar credencias globais do github
 
 ### Execute o comando abaixo para abrir o arquivo de configurações do github
 

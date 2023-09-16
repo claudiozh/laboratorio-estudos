@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Backup e restauração no Postgres
+# 📦 Backup e restauração no Postgres
 
 ### Backup usando pg\_dumpall
 

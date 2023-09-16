@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Como organizar e estruturar projetos com NodeJS
+# 📂 Como organizar e estruturar projetos com NodeJS
 
 No node temos muita liberdade para construir nossa API REST da forma que desejarmos, quem está começando não sabe ao certo como organizar.
 

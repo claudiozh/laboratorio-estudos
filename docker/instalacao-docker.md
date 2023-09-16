@@ -13,7 +13,7 @@ layout:
     visible: true
 ---
 
-# Instalação docker
+# 🐳 Instalação docker
 
 ### **Passo 1: Instale o Docker**
 

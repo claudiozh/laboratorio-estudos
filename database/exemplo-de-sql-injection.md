@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Exemplo de SQL Injection
+# 🎃 Exemplo de SQL Injection
 
 ### Código malicioso
 

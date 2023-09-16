@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Regex
+# 😭 Regex
 
 ### Regex para aceitar somente letras de **\[ a-z e \_ ]** e limitar quantidade de caracteres.
 

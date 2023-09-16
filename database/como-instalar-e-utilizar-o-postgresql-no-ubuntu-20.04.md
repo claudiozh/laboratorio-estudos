@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04
+# 🐘 Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04
 
 <figure><img src="https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg" alt=""><figcaption></figcaption></figure>
 

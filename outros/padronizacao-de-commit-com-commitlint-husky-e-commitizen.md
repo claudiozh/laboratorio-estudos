@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Padronização de commit com (Commitlint, Husky e Commitizen)
+# 🖱 Padronização de commit com (Commitlint, Husky e Commitizen)
 
 ### Introdução <a href="#introducao" id="introducao"></a>
 

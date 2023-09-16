@@ -15,7 +15,7 @@ layout:
     visible: true
 ---
 
-# Criando usuário readonly no postgres
+# 🕵♂ Criando usuário readonly no postgres
 
 ### Criar um novo usuário \[claudio]
 

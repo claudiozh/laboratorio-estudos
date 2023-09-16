@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# RabbitMQ
+# 🦑 RabbitMQ
 
 ### Sobre o RabbitMQ Comment <a href="#sobre-o-rabbitmq" id="sobre-o-rabbitmq"></a>
 

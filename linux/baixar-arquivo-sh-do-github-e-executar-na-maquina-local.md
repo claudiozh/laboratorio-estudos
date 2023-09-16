@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Baixar arquivo sh do github e executar na máquina local
+# ⬇ Baixar arquivo sh do github e executar na máquina local
 
 {% code overflow="wrap" %}
 ```sh

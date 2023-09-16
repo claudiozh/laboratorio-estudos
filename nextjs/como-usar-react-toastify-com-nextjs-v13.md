@@ -1,4 +1,4 @@
-# Como usar React Toastify com NextJS V13
+# 🙉 Como usar React Toastify com NextJS V13
 
 Criar provider que utilize o ToastContainer da lib React Toastify
 

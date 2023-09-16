@@ -5,7 +5,7 @@ description: >-
   com TypeScript.
 ---
 
-# Aplicando Princípios SOLID no NestJS
+# 🎉 Aplicando Princípios SOLID no NestJS
 
 ## Introdução
 

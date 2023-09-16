@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Select para mostrar nome das tabelas que contêm determinada coluna
+# 🔍 Select para mostrar nome das tabelas que contêm determinada coluna
 
 {% code overflow="wrap" %}
 ```plsql

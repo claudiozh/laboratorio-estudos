@@ -12,6 +12,6 @@ layout:
     visible: true
 ---
 
-# Ciclo de vida de uma requisição
+# 🔴 Ciclo de vida de uma requisição
 
 <figure><img src="../.gitbook/assets/ciclo-vida-requisicao-nestjs.webp" alt=""><figcaption></figcaption></figure>

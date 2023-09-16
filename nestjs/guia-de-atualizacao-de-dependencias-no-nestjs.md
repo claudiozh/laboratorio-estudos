@@ -15,7 +15,7 @@ layout:
     visible: true
 ---
 
-# Guia de Atualização de Dependências no NestJS
+# 🐈⬛ Guia de Atualização de Dependências no NestJS
 
 Instalar globalmente duas ferramentas de linha de comando: o `@nestjs/cli`, que é a interface de linha de comando oficial do NestJS, e o `npm-check-updates`, uma ferramenta útil para verificar e atualizar as versões das dependências do projeto.
 

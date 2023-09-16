@@ -5,7 +5,7 @@ description: >-
   senha e criar usuário não-root.
 ---
 
-# Configurando acesso SSH seguro com chaves públicas/privadas
+# 🎉 Configurando acesso SSH seguro com chaves públicas/privadas
 
 ## Roteiro para configurar o acesso SSH utilizando chaves públicas/privadas:
 

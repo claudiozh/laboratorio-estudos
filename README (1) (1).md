@@ -1,4 +1,4 @@
-# Deploy com docker e prisma para servidor remoto sem usar registrador de imagens
+# 👷 Deploy com docker e prisma para servidor remoto sem usar registrador de imagens
 
 Nesta abordagem de implantação, você aprenderá como fazer o deploy de uma aplicação utilizando Docker e Prisma em um servidor remoto, sem depender de um registrador de imagens.&#x20;
 

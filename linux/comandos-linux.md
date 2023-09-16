@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Comandos linux
+# 🧙♂ Comandos linux
 
 ### **Permissão para pasta**
 

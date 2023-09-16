@@ -5,7 +5,7 @@ description: >-
   é comumente usado em testes
 ---
 
-# Por que fazer mock das datas usando testes
+# 📅 Por que fazer mock das datas usando testes
 
 ## 1 - Teste mais previsíveis
 

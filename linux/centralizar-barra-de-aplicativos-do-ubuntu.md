@@ -12,7 +12,7 @@ layout:
     visible: true
 ---
 
-# Centralizar barra de aplicativos do Ubuntu
+# 👾 Centralizar barra de aplicativos do Ubuntu
 
 Para centralizar a dock de aplicativos no Ubuntu execute o seguinte comado:
 
