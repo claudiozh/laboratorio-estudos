@@ -4,21 +4,21 @@
 
 ## NodeJS
 
-* [Como organizar e estruturar projetos com NodeJS](<README (1).md>)
-* [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1) (1).md>)
+* [📂 Como organizar e estruturar projetos com NodeJS](<README (1).md>)
+* [👷 Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1) (1).md>)
 
 ## NestJS
 
-* [Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
-* [Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
-* [Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
+* [🐈⬛ Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
+* [🎉 Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
+* [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 
 ## Docker
 
-* [Instalação docker](docker/instalacao-docker.md)
-* [Comandos docker](docker/comandos-docker.md)
-* [Curso docker](docker/curso-docker.md)
-* [Dockerfile prod nestjs](docker/dockerfile-prod-nestjs.md)
+* [🐳 Instalação docker](docker/instalacao-docker.md)
+* [⌨ Comandos docker](docker/comandos-docker.md)
+* [🎒 Curso docker](docker/curso-docker.md)
+* [🔥 Dockerfile prod nestjs](docker/dockerfile-prod-nestjs.md)
 
 ## Database
 
