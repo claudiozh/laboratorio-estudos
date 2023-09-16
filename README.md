@@ -14,15 +14,13 @@ layout:
 
 # Como organizar e estruturar projetos com NodeJS
 
-<figure><img src="https://miro.medium.com/v2/resize:fit:560/0*JH_HgIXBQvuenmUl.jpg" alt="" height="438" width="700"><figcaption></figcaption></figure>
-
 No node temos muita liberdade para construir nossa API REST da forma que desejarmos, quem está começando não sabe ao certo como organizar.
 
 Talvez em projetos pequenos você não perceba os problemas que isso pode te causar, projetos maiores onde visa escalonar, provavelmente terá problemas com essa organização para manter o código com um alto acoplamento trazendo falta de reutilização de código, falta de estabilidade...
 
 Por isso nesse artigo vamos falar sobre uma estrutura que irá ajudar a trazer uma melhor sustentabilidade e escalonabilidade para sua aplicação.
 
-## Estrutura de pastas 📚 <a href="#019d" id="019d"></a>
+## Estrutura de pastas  <a href="#019d" id="019d"></a>
 
 > Lembrando que cada projeto tem suas peculiaridades, então basta você/equipe decidir o que é melhor para adicionar ou remover no seu projeto visando sempre o equilibrio entre agilidade e qualidade na entrega do produto.
 
