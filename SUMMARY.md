@@ -2,7 +2,8 @@
 
 ## NodeJS
 
-* [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](README.md)
+* [Como organizar e estruturar projetos com NodeJS](README.md)
+* [Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1).md>)
 
 ## NestJS
 
@@ -16,7 +17,12 @@
 
 ## Database
 
+* [Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04](database/como-instalar-e-utilizar-o-postgresql-no-ubuntu-20.04.md)
+* [Instalação Postgres](database/instalacao-postgres.md)
+* [Backup e restauração no Postgres](database/backup-e-restauracao-no-postgres.md)
 * [Exemplo de SQL Injection](database/exemplo-de-sql-injection.md)
+* [Select para mostrar nome das tabelas que contêm determinada coluna](database/select-para-mostrar-nome-das-tabelas-que-contem-determinada-coluna.md)
+* [Insert em uma tabela A, com dados de uma tabela B](database/insert-em-uma-tabela-a-com-dados-de-uma-tabela-b.md)
 
 ## NextJS
 
