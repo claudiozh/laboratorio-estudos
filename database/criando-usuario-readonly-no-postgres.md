@@ -21,7 +21,7 @@ layout:
 
 {% code overflow="wrap" %}
 ```plsql
-CREATE USER flavio WITH PASSWORD 'minha-senha-segura';
+CREATE USER claudio WITH PASSWORD 'minha-senha-segura';
 ```
 {% endcode %}
 
