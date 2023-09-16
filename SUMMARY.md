@@ -15,8 +15,9 @@
 
 ## Docker
 
-* [Curso docker](docker/curso-docker.md)
+* [Instalação docker](docker/instalacao-docker.md)
 * [Comandos docker](docker/comandos-docker.md)
+* [Curso docker](docker/curso-docker.md)
 * [Dockerfile prod nestjs](docker/dockerfile-prod-nestjs.md)
 
 ## Database
