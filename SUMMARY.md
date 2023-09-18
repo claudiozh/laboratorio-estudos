@@ -13,6 +13,10 @@
 * [🎉 Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
 * [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 
+## Golang
+
+* [🦫 Curso: Aprenda Go](golang/curso-aprenda-go.md)
+
 ## Docker
 
 * [🐳 Instalação docker](docker/instalacao-docker.md)
