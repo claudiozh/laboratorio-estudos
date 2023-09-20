@@ -16,6 +16,8 @@
 ## Golang
 
 * [🦫 Curso: Aprenda Go](golang/curso-aprenda-go.md)
+* [😥 Interface e Polimorfismo](golang/interface-e-polimorfismo.md)
+* [🔗 Links úteis](golang/links-uteis.md)
 
 ## Docker
 
