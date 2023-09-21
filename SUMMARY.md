@@ -36,6 +36,7 @@
 * [📦 Backup e restauração no Postgres](database/backup-e-restauracao-no-postgres.md)
 * [🎃 Exemplo de SQL Injection](database/exemplo-de-sql-injection.md)
 * [🔍 Select para mostrar nome das tabelas que contêm determinada coluna](database/select-para-mostrar-nome-das-tabelas-que-contem-determinada-coluna.md)
+* [🔍 Consultas JSON no postgres](database/consultas-json-no-postgres.md)
 * [➕ Insert em uma tabela A, com dados de uma tabela B](database/insert-em-uma-tabela-a-com-dados-de-uma-tabela-b.md)
 
 ## NextJS
