@@ -99,3 +99,10 @@ rm*.log
 ssh -L 5432:localhost:5432 usuario@ip
 ```
 {% endcode %}
+
+### Exibir tamanho dos arquivos/pastas dentro de uma pasta
+
+```sh
+du -h
+```
+
