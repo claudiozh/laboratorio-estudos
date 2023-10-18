@@ -6,6 +6,7 @@
 
 * [📂 Como organizar e estruturar projetos com NodeJS](<README (1).md>)
 * [👷 Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1) (1).md>)
+* [🔐 Melhores práticas para proteger aplicativos Node.js em produção](nodejs/melhores-praticas-para-proteger-aplicativos-node.js-em-producao.md)
 
 ## NestJS
 
