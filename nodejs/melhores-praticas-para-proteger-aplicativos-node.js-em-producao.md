@@ -50,8 +50,8 @@ Para garantir que as bibliotecas NPM nas quais você confia sejam seguras, você
 
 Aqui está um exemplo de execução `npm audit`:
 
-```
-auditoria npm 
+```sh
+npm audit
 ... 
 encontrou 4 vulnerabilidades ( 2 baixas, 2 moderadas) 
 execute `npm audit fix` para corrigi-las ou `npm audit` para obter detalhes
@@ -62,19 +62,19 @@ Este comando aproveita o [banco de dados consultivo GitHub](https://github.com/a
 Além disso, você pode usar [o Snyk](https://snyk.io/) para verificar suas dependências no [banco de dados de vulnerabilidades de código aberto do Snyk](https://snyk.io/vuln/) . Instale `snyk`com:
 
 ```
-npm instalar -g snyk
+npm install -g snyk
 ```
 
 Na pasta raiz do seu projeto, teste sua aplicação com:
 
-```
-teste de snyk
+```sh
+snyk test
 ```
 
 Para abrir um assistente que orientará você no processo de correção das vulnerabilidades encontradas, execute:
 
-```
-mago snyk
+```sh
+snyk wizard
 ```
 
 Usar `snyk`e executar regularmente `npm audit`ajuda a identificar e corrigir problemas de segurança em suas bibliotecas NPM antes que eles se tornem um problema. Lembre-se de que a segurança do seu aplicativo é tão forte quanto o elo mais fraco das suas dependências.
@@ -85,17 +85,18 @@ Os nomes dos cookies usados ​​pelo seu aplicativo Node.js podem revelar invo
 
 Em detalhes, os invasores tendem a se concentrar no nome do cookie de sessão. Proteja seu aplicativo contra isso definindo um nome de cookie de sessão personalizado com o [`express-session`](https://www.npmjs.com/package/express-session)middleware:
 
-```
-const expresso = exigir ( 'expresso' ); 
-sessão const = requer ( 'sessão expressa' );
+```javascript
+const express = require('express');
+const session = require('express-session');
 ```
 
-```
-const app=express();app.use(session({ 
-  // define um nome personalizado para o 
-  nome do cookie de sessão: 'myCustomCookieName', 
-  // uma chave secreta segura para 
-  segredo de criptografia de sessão: 'mySecretKey', 
+```javascript
+const app = express();
+app.use(session({
+  // set a custom name for the session cookie
+  name: 'myCustomCookieName', 
+  // a secure secret key for session encryption
+  secret: 'mySecretKey', 
 }));
 ```
 
@@ -109,14 +110,15 @@ Alguns desses cabeçalhos contêm informações que não devem ser expostas publ
 
 É aqui que [`helmet`](https://www.npmjs.com/package/helmet)entra em jogo! Esta biblioteca se encarrega de definir os cabeçalhos de segurança mais importantes com base nas recomendações dos Cabeçalhos de Segurança. Use-o da seguinte maneira:
 
-```
-const expresso = exigir ( 'expresso' ); 
-const capacete = exigir ( 'capacete' );
+```javascript
+const express = require('express');
+const helmet = require('helmet');
 ```
 
-```
-const app=express();// registra o middleware do capacete 
-// para definir os cabeçalhos de segurança 
+```javascript
+const app = express();
+// register the helmet middleware
+// to set the security headers
 app.use(helmet());
 ```
 
@@ -134,28 +136,31 @@ A maneira mais fácil de implementar a limitação de taxa é por meio da [`rate
 
 Aqui está um exemplo de como usá-lo para aplicar limitação de taxa em Node.js:
 
-```
-const expresso = exigir ( 'expresso' ); 
-const { RateLimiterMemory } = require ( 'limitador de taxa flexível' );
+```javascript
+const express = require('express');
+const { RateLimiterMemory } = require('rate-limiter-flexible');
 ```
 
-```
-const app=express();const rateLimiter = new RateLimiterMemory({ 
-  pontos: 10, // número máximo de solicitações permitidas 
-  duração: 1, // período de tempo em segundos 
-});const rateLimiterMiddleware = (req, res, next) => { 
-   rateLimiter.consume(req.ip) 
-      .then(() => { 
-          // solicitação permitida, 
-          // prosseguir com o tratamento da solicitação 
-          next(); 
-      }) 
-      .catch( () => { 
-          // limite de solicitação excedido, 
-          // responde com uma mensagem de erro apropriada 
-          res.status(429).send('Too Many Requests'); 
-      }); 
-   };app.use(rateLimiterMiddleware);
+```javascript
+const app = express();
+const rateLimiter = new RateLimiterMemory({
+  points: 10, // maximum number of requests allowed
+  duration: 1, // time frame in seconds
+});
+const rateLimiterMiddleware = (req, res, next) => {
+   rateLimiter.consume(req.ip)
+      .then(() => {
+          // request allowed, 
+          // proceed with handling the request
+          next();
+      })
+      .catch(() => {
+          // request limit exceeded, 
+          // respond with an appropriate error message
+          res.status(429).send('Too Many Requests');
+      });
+   };
+app.use(rateLimiterMiddleware);
 ```
 
 Primeiro, uma instância do limitador de taxa que permite um máximo de 10 solicitações em 1 segundo é inicializada. Em seguida, ele é usado em um middleware customizado para analisar o IP da solicitação recebida. Se o limite de taxa não for excedido, a solicitação prossegue. Caso contrário, a solicitação será bloqueada e o servidor retornará uma [`429 Too Many Requests`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)resposta.
@@ -184,11 +189,11 @@ Ao garantir que seu back-end seja acessível apenas via HTTPS, você melhorará 
 
 Como parte dessa política, você também deve usar [cookies HTTPS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) . Para conseguir isso, certifique-se de que todos os cookies definidos pelo seu aplicativo Node.js estejam marcados como [`secure`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict\_access\_to\_cookies)[e](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict\_access\_to\_cookies)[`httpOnly`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict\_access\_to\_cookies) \`:
 
-```
-res. cookie ( 'myCookie' , 'cookieValue' , { 
-  // cria um cookie HTTPS 
-  seguro : true , 
-  httpOnly : true , 
+```javascript
+res.cookie('myCookie', 'cookieValue', {
+  // create an HTTPS cookie
+  secure: true,
+  httpOnly: true,
 });
 ```
 
@@ -220,13 +225,14 @@ Existem várias maneiras de evitar a injeção de SQL no Node.js. Os mais popula
 
 O limite de tamanho do corpo da solicitação padrão no Node.js é 5 MB. Para proteger seu back-end de ataques DDoS em que usuários mal-intencionados tentam inundar seu servidor com dados, é recomendável reduzir esse limite. Para fazer isso, você pode usar a [`body-parser`](https://www.npmjs.com/package/body-parser)biblioteca e configurá-la conforme abaixo:
 
-```
-const expresso = exigir ( 'expresso' ); 
-const bodyParser = require ( 'body-parser' );
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
 ```
 
-```
-const app=express();// define o limite de tamanho da solicitação para 1 MB 
+```javascript
+const app = express();
+// set the request size limit to 1 MB
 app.use(bodyParser.json({ limit: '1mb' }));
 ```
 
@@ -250,9 +256,9 @@ Uma abordagem eficaz para permitir que os pesquisadores entrem em contato com vo
 
 Aqui está um exemplo de `security.txt`arquivo básico:
 
-```
-Contato: email @example .com 
-Criptografia: https: //example.com/pgp-key.asc
+```javascript
+Contact: email@example.com
+Encryption: https://example.com/pgp-key.asc
 ```
 
 `Contact`especifica o endereço de e-mail para o qual vulnerabilidades ou preocupações de segurança devem ser relatadas. Esses e-mails podem conter informações críticas e não devem ser acessíveis ao público. Assim, o `Encryption`campo indica a localização da chave pública [PGP](https://en.wikipedia.org/wiki/Pretty\_Good\_Privacy) da organização que pode ser utilizada para criptografar mensagens dentro dos e-mails. Este mecanismo garante que apenas a organização possa descriptografar essas mensagens com a chave privada e lê-las.
