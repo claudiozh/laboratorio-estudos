@@ -13,6 +13,7 @@
 * [🐈⬛ Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
 * [🎉 Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
 * [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
+* [🌎 Arquiteturas escaláveis no NestJS com standalone](nestjs/arquiteturas-escalaveis-no-nestjs-com-standalone.md)
 
 ## Golang
 
