@@ -67,3 +67,7 @@
 * [🖱 Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
 * [🦑 RabbitMQ](outros/rabbitmq.md)
 * [😭 Regex](outros/regex.md)
+
+## Python
+
+* [🎥 Script para baixar vídeo do Youtube](python/script-para-baixar-video-do-youtube.md)
