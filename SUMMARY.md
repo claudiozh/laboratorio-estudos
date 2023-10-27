@@ -9,6 +9,10 @@
 * [👷 Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1) (1).md>)
 * [🔐 Melhores práticas para proteger aplicativos Node.js em produção](nodejs/melhores-praticas-para-proteger-aplicativos-node.js-em-producao.md)
 
+## Typescript
+
+* [🔢 Como saber qual versão do EcmaScript utilizar](typescript/como-saber-qual-versao-do-ecmascript-utilizar.md)
+
 ## NestJS
 
 * [🐈⬛ Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
