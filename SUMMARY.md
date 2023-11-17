@@ -22,12 +22,15 @@
 
 ## Golang
 
-* [🦫 Curso: Aprenda Go](golang/curso-aprenda-go.md)
-* [😥 Interface e Polimorfismo](golang/interface-e-polimorfismo.md)
-* [👊 Go x Typescript](golang/go-x-typescript.md)
+* [🦫 Curso: Aprenda Go](golang/curso-aprenda-go/README.md)
+  * [😥 Interface e Polimorfismo](golang/curso-aprenda-go/interface-e-polimorfismo.md)
+* [🥅 Go expert](golang/go-expert/README.md)
+  * [📖 1 - Introdução](golang/go-expert/1-introducao.md)
+  * [✏ 2 - Fundação](golang/go-expert/2-fundacao.md)
 * [🌪 Recursividade](golang/recursividade.md)
-* [🤡 Closure](golang/closure.md)
 * [🔗 Links úteis](golang/links-uteis.md)
+* [👊 Go x Typescript](golang/go-x-typescript.md)
+* [🤡 Closure](golang/closure.md)
 
 ## Docker
 
