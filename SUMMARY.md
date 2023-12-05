@@ -7,7 +7,7 @@
 * [🆕 Como atualizar versão do NodeJS](nodejs/como-atualizar-versao-do-nodejs.md)
 * [📂 Como organizar e estruturar projetos com NodeJS](<README (1).md>)
 * [👷 Deploy com docker e prisma para servidor remoto sem usar registrador de imagens](<README (1) (1).md>)
-* [🔐 Melhores práticas para proteger aplicativos Node.js em produção](nodejs/melhores-praticas-para-proteger-aplicativos-node.js-em-producao.md)
+* [🔐 Boas práticas para proteger aplicativos Node.js em produção](nodejs/boas-praticas-para-proteger-aplicativos-node.js-em-producao.md)
 
 ## Typescript
 
@@ -19,6 +19,7 @@
 * [🎉 Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
 * [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 * [🌎 Arquiteturas escaláveis no NestJS com standalone](nestjs/arquiteturas-escalaveis-no-nestjs-com-standalone.md)
+* [📄 Paginação com prisma](nestjs/paginacao-com-prisma.md)
 
 ## Golang
 

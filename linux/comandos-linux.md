@@ -106,3 +106,10 @@ ssh -L 5432:localhost:5432 usuario@ip
 du -h
 ```
 
+### Gerar hash usando open-ssl
+
+{% code title="32 é o tamanho da hash" %}
+```bash
+openssl rand -hex 32
+```
+{% endcode %}
