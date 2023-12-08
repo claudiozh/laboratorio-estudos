@@ -60,6 +60,7 @@
 * [🎉 Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
 * [👾 Centralizar barra de aplicativos do Ubuntu](linux/centralizar-barra-de-aplicativos-do-ubuntu.md)
 * [🧙♂ Comandos linux](linux/comandos-linux.md)
+* [🔑 Como acessar máquina com certificado](linux/como-acessar-maquina-com-certificado.md)
 
 ## Testes automatizados
 
