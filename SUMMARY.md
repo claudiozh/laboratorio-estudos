@@ -70,6 +70,7 @@
 ## Github
 
 * [🆔 Alterar credencias globais do github](github/alterar-credencias-globais-do-github.md)
+* [👾 Comandos uteis](github/comandos-uteis.md)
 
 ## Outros
 
