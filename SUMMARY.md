@@ -20,6 +20,7 @@
 * [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 * [🌎 Arquiteturas escaláveis no NestJS com standalone](nestjs/arquiteturas-escalaveis-no-nestjs-com-standalone.md)
 * [📄 Paginação com prisma](nestjs/paginacao-com-prisma.md)
+* [🔍 Filtros com prisma](nestjs/filtros-com-prisma.md)
 
 ## Golang
 
