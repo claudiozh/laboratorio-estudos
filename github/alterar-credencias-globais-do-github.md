@@ -82,7 +82,7 @@ fi
 ### Adicionar permissão no arquivo
 
 ```bash
-chmod +x .change-github-credentials.sh
+chmod +x change-github-credentials.sh
 ```
 
 ### Mover o scrip para um diretório de execução do linux
