@@ -17,17 +17,16 @@ layout:
 O módulo n facilita o gerenciamento de versões
 
 ```sh
-npm install n -g
+sudo npm install n -g
 ```
 
 Para baixar a última versão instável:&#x20;
 
 ```sh
-n stable
+sudo n stable
 ```
 
 Para baixar a última versão:
 
-```sh
-n latest
-```
+<pre class="language-sh"><code class="lang-sh"><strong>sudo n latest
+</strong></code></pre>

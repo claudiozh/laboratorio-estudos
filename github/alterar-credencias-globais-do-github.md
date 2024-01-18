@@ -36,7 +36,7 @@ sudo nano \.gitconfig
 
 ### Crie um arquivo em seu diretório principal
 
-{% code title=".git-credentials.sh" %}
+{% code title=".git-credentials" %}
 ```bash
 sudo nano .git-credentials
 ```
@@ -45,7 +45,7 @@ sudo nano .git-credentials
 ### Adicionar permissão no arquivo
 
 ```bash
-chmod +x .git-credentials.sh
+chmod +x .git-credentials
 ```
 
 ### Adicione a seguinte linha no arquivo e substitua com seus dados do github
@@ -58,7 +58,7 @@ https://YOUR_GITHUB_USERNAME:ACCESS_TOKEN@github.com
 
 ### Crie um scrip para fazer a troca entre credencias entre contas
 
-<pre class="language-bash" data-title="change-github-credentials.sh" data-overflow="wrap"><code class="lang-bash"><strong>
+<pre class="language-bash" data-title="change-github-credentials" data-overflow="wrap"><code class="lang-bash"><strong>
 </strong><strong>WORK_URL="https://NOME_USER:ACCESS_TOKEN@github.com"
 </strong>
 PERSONAL_URL="https://NOME_USER:ACCESS_TOKEN@github.com"
@@ -82,13 +82,13 @@ fi
 ### Adicionar permissão no arquivo
 
 ```bash
-chmod +x change-github-credentials.sh
+sudo chmod +x change-github-credentials
 ```
 
 ### Mover o scrip para um diretório de execução do linux
 
 ```bash
-mv /usr/local/bin change-github-credentials
+mv change-github-credentials /usr/local/bin(ou sbin)
 ```
 
 Pronto agora é só executar o scrip para realizar a troca entre credenciais
