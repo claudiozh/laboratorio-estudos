@@ -72,12 +72,14 @@
 
 * [🆔 Alterar credencias globais do github](github/alterar-credencias-globais-do-github.md)
 * [👾 Comandos uteis](github/comandos-uteis.md)
+* [⁉ Dúvidas sobre mensagens de commit](github/duvidas-sobre-mensagens-de-commit.md)
 
 ## Outros
 
 * [🖱 Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
 * [🦑 RabbitMQ](outros/rabbitmq.md)
 * [😭 Regex](outros/regex.md)
+* [📩 Template envio de e-mail](outros/template-envio-de-e-mail.md)
 
 ## Python
 

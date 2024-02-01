@@ -14,7 +14,7 @@ layout:
 
 # 👾 Centralizar barra de aplicativos do Ubuntu
 
-Para centralizar a dock de aplicativos no Ubuntu execute o seguinte comado:
+Para centralizar a **dock** de aplicativos no **Ubuntu** execute o seguinte comado:
 
 ```sh
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
