@@ -62,6 +62,7 @@
 * [👾 Centralizar barra de aplicativos do Ubuntu](linux/centralizar-barra-de-aplicativos-do-ubuntu.md)
 * [🧙♂ Comandos linux](linux/comandos-linux.md)
 * [🔑 Como acessar máquina com certificado](linux/como-acessar-maquina-com-certificado.md)
+* [💻 This Indicator Shows CPU, GPU, Memory Usage on Ubuntu 22.04 Panel Last updated: January 30, 2023 — 5](linux/this-indicator-shows-cpu-gpu-memory-usage-on-ubuntu-22.04-panel-last-updated-january-30-2023-5.md)
 
 ## Testes automatizados
 
