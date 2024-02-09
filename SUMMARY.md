@@ -81,6 +81,7 @@
 * [🦑 RabbitMQ](outros/rabbitmq.md)
 * [😭 Regex](outros/regex.md)
 * [📩 Template envio de e-mail](outros/template-envio-de-e-mail.md)
+* [🌟 Sites uteis](outros/sites-uteis.md)
 
 ## Python
 
