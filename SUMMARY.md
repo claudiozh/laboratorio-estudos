@@ -51,9 +51,10 @@
 * [🔍 Consultas JSON no postgres](database/consultas-json-no-postgres.md)
 * [➕ Insert em uma tabela A, com dados de uma tabela B](database/insert-em-uma-tabela-a-com-dados-de-uma-tabela-b.md)
 
-## NextJS
+## React - NextJS
 
-* [🙉 Como usar React Toastify com NextJS V13](nextjs/como-usar-react-toastify-com-nextjs-v13.md)
+* [🙉 Como usar React Toastify com NextJS V13](react-nextjs/como-usar-react-toastify-com-nextjs-v13.md)
+* [📃 Planilhas com React JS](react-nextjs/planilhas-com-react-js.md)
 
 ## Linux
 
