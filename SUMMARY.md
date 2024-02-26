@@ -15,7 +15,7 @@
 
 ## NestJS
 
-* [🐈⬛ Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
+* [🐈‍⬛ Guia de Atualização de Dependências no NestJS](nestjs/guia-de-atualizacao-de-dependencias-no-nestjs.md)
 * [🎉 Aplicando Princípios SOLID no NestJS](nestjs/aplicando-principios-solid-no-nestjs.md)
 * [🔴 Ciclo de vida de uma requisição](nestjs/ciclo-de-vida-de-uma-requisicao.md)
 * [🌎 Arquiteturas escaláveis no NestJS com standalone](nestjs/arquiteturas-escalaveis-no-nestjs-com-standalone.md)
@@ -28,8 +28,8 @@
   * [😥 Interface e Polimorfismo](golang/curso-aprenda-go/interface-e-polimorfismo.md)
 * [🥅 Go expert](golang/go-expert/README.md)
   * [📖 1 - Introdução](golang/go-expert/1-introducao.md)
-  * [✏ 2 - Fundação](golang/go-expert/2-fundacao.md)
-* [🌪 Recursividade](golang/recursividade.md)
+  * [✏️ 2 - Fundação](golang/go-expert/2-fundacao.md)
+* [🌪️ Recursividade](golang/recursividade.md)
 * [🔗 Links úteis](golang/links-uteis.md)
 * [👊 Go x Typescript](golang/go-x-typescript.md)
 * [🤡 Closure](golang/closure.md)
@@ -37,14 +37,14 @@
 ## Docker
 
 * [🐳 Instalação docker](docker/instalacao-docker.md)
-* [⌨ Comandos docker](docker/comandos-docker.md)
+* [⌨️ Comandos docker](docker/comandos-docker.md)
 * [🎒 Curso docker](docker/curso-docker.md)
 * [🔥 Dockerfile prod nestjs](docker/dockerfile-prod-nestjs.md)
 
 ## Database
 
 * [🐘 Como Instalar e Utilizar o PostgreSQL no Ubuntu 20.04](database/como-instalar-e-utilizar-o-postgresql-no-ubuntu-20.04.md)
-* [🕵♂ Criando usuário readonly no postgres](database/criando-usuario-readonly-no-postgres.md)
+* [🕵️‍♂️ Criando usuário readonly no postgres](database/criando-usuario-readonly-no-postgres.md)
 * [📦 Backup e restauração no Postgres](database/backup-e-restauracao-no-postgres.md)
 * [🎃 Exemplo de SQL Injection](database/exemplo-de-sql-injection.md)
 * [🔍 Select para mostrar nome das tabelas que contêm determinada coluna](database/select-para-mostrar-nome-das-tabelas-que-contem-determinada-coluna.md)
@@ -57,27 +57,28 @@
 
 ## Linux
 
-* [⬇ Baixar arquivo sh do github e executar na máquina local](linux/baixar-arquivo-sh-do-github-e-executar-na-maquina-local.md)
+* [⬇️ Baixar arquivo sh do github e executar na máquina local](linux/baixar-arquivo-sh-do-github-e-executar-na-maquina-local.md)
 * [🎉 Configurando acesso SSH seguro com chaves públicas/privadas](linux/configurando-acesso-ssh-seguro-com-chaves-publicas-privadas.md)
 * [👾 Centralizar barra de aplicativos do Ubuntu](linux/centralizar-barra-de-aplicativos-do-ubuntu.md)
-* [🧙♂ Comandos linux](linux/comandos-linux.md)
+* [🧙‍♂️ Comandos linux](linux/comandos-linux.md)
 * [🔑 Como acessar máquina com certificado](linux/como-acessar-maquina-com-certificado.md)
 * [💻 This Indicator Shows CPU, GPU, Memory Usage on Ubuntu 22.04 Panel Last updated: January 30, 2023 — 5](linux/this-indicator-shows-cpu-gpu-memory-usage-on-ubuntu-22.04-panel-last-updated-january-30-2023-5.md)
+* [📠 O que instalo em uma máquina ubuntu](linux/o-que-instalo-em-uma-maquina-ubuntu.md)
 
 ## Testes automatizados
 
 * [📅 Por que fazer mock das datas usando testes](testes-automatizados/por-que-fazer-mock-das-datas-usando-testes.md)
-* [🏚 Principais bibliotecas para fazer testes usando nodejs](testes-automatizados/principais-bibliotecas-para-fazer-testes-usando-nodejs.md)
+* [🏚️ Principais bibliotecas para fazer testes usando nodejs](testes-automatizados/principais-bibliotecas-para-fazer-testes-usando-nodejs.md)
 
 ## Github
 
 * [🆔 Alterar credencias globais do github](github/alterar-credencias-globais-do-github.md)
 * [👾 Comandos uteis](github/comandos-uteis.md)
-* [⁉ Dúvidas sobre mensagens de commit](github/duvidas-sobre-mensagens-de-commit.md)
+* [⁉️ Dúvidas sobre mensagens de commit](github/duvidas-sobre-mensagens-de-commit.md)
 
 ## Outros
 
-* [🖱 Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
+* [🖱️ Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
 * [🦑 RabbitMQ](outros/rabbitmq.md)
 * [😭 Regex](outros/regex.md)
 * [📩 Template envio de e-mail](outros/template-envio-de-e-mail.md)
