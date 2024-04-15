@@ -21,6 +21,8 @@
 * [🌎 Arquiteturas escaláveis no NestJS com standalone](nestjs/arquiteturas-escalaveis-no-nestjs-com-standalone.md)
 * [📄 Paginação com prisma](nestjs/paginacao-com-prisma.md)
 * [🔍 Filtros com prisma](nestjs/filtros-com-prisma.md)
+* [🔐 Role Based Access Control in NestJS (RBAC)](nestjs/role-based-access-control-in-nestjs-rbac.md)
+* [😄 Como usar expressões regulares no caminho da rota e como tornar os parâmetros opcionais](nestjs/como-usar-expressoes-regulares-no-caminho-da-rota-e-como-tornar-os-parametros-opcionais.md)
 
 ## Golang
 
