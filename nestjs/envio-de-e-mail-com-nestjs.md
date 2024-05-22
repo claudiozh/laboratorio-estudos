@@ -330,3 +330,9 @@ And there you have it! With these steps, you’re now equipped to send beautiful
 GitHub Code: Find the working code on my [GitHub repository.](https://github.com/bhagyajitjagdev/nestjs-email) Feel free to explore, fork, and adapt it to your needs.
 
 Happy coding! 🚀
+
+
+
+## Reference 🌟
+
+{% embed url="https://blog.stackademic.com/implementing-email-service-in-nestjs-a-step-by-step-guide-42e03ef1fb05" %}
