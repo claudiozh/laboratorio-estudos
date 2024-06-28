@@ -53,6 +53,7 @@
 * [🔍 Select para mostrar nome das tabelas que contêm determinada coluna](database/select-para-mostrar-nome-das-tabelas-que-contem-determinada-coluna.md)
 * [🔍 Consultas JSON no postgres](database/consultas-json-no-postgres.md)
 * [➕ Insert em uma tabela A, com dados de uma tabela B](database/insert-em-uma-tabela-a-com-dados-de-uma-tabela-b.md)
+* [🌟 Select para trazer todas as colunas da base de dados](database/select-para-trazer-todas-as-colunas-da-base-de-dados.md)
 
 ## React - NextJS
 
