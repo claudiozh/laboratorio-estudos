@@ -89,6 +89,7 @@
 * [😭 Regex](outros/regex.md)
 * [📩 Template envio de e-mail](outros/template-envio-de-e-mail.md)
 * [🌟 Sites uteis](outros/sites-uteis.md)
+* [🔐 Instalar keepassxc](outros/instalar-keepassxc.md)
 * [💡 Ferramentas para usar no trabalho](outros/ferramentas-para-usar-no-trabalho.md)
 
 ## Python
