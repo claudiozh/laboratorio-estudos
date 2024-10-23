@@ -54,7 +54,7 @@ sudo apt install fuse
 
 ## Conclusão
 
-Após realizar todos os passos pasta pesquisar o aplicativo na sua lista de aplicativos
+Após realizar todos os passos basta pesquisar o aplicativo na sua lista de aplicativos
 
 
 
