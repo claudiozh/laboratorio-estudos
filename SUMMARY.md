@@ -81,6 +81,10 @@
 * [👾 Comandos uteis](github/comandos-uteis.md)
 * [⁉️ Dúvidas sobre mensagens de commit](github/duvidas-sobre-mensagens-de-commit.md)
 
+## Python
+
+* [🎥 Script para baixar vídeo do Youtube](python/script-para-baixar-video-do-youtube.md)
+
 ## Outros
 
 * [Recaptcha](outros/recaptcha.md)
@@ -91,7 +95,4 @@
 * [🌟 Sites uteis](outros/sites-uteis.md)
 * [🔐 Instalar keepassxc](outros/instalar-keepassxc.md)
 * [💡 Ferramentas para usar no trabalho](outros/ferramentas-para-usar-no-trabalho.md)
-
-## Python
-
-* [🎥 Script para baixar vídeo do Youtube](python/script-para-baixar-video-do-youtube.md)
+* [📄 Paginação Eficiente: Offset vs Cursor pagination](outros/paginacao-eficiente-offset-vs-cursor-pagination.md)
