@@ -14,4 +14,5 @@ layout:
 
 # 🌎 Arquiteturas escaláveis no NestJS com standalone
 
-[https://encurtaki.me/standalone](https://encurtaki.me/standalone)
+Código fonte: [https://encurtaki.me/standalone](https://encurtaki.me/standalone)\
+Aula YouTube: [https://www.youtube.com/watch?v=ix-nTTkzyxI](https://www.youtube.com/watch?v=ix-nTTkzyxI)
