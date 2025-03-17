@@ -17,6 +17,8 @@ layout:
 O módulo n facilita o gerenciamento de versões
 
 ```sh
+sudo apt update
+sudo apt install nodejs npm -y
 sudo npm install n -g
 ```
 
