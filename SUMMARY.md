@@ -24,6 +24,7 @@
 * [🔐 Role Based Access Control in NestJS (RBAC)](nestjs/role-based-access-control-in-nestjs-rbac.md)
 * [😄 Como usar expressões regulares no caminho da rota e como tornar os parâmetros opcionais](nestjs/como-usar-expressoes-regulares-no-caminho-da-rota-e-como-tornar-os-parametros-opcionais.md)
 * [📧 Envio de e-mail com NestJS](nestjs/envio-de-e-mail-com-nestjs.md)
+* [Construindo sistemas webhook robustos com NestJS](nestjs/construindo-sistemas-webhook-robustos-com-nestjs.md)
 
 ## Golang
 
