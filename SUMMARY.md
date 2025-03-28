@@ -88,6 +88,7 @@
 
 ## Outros
 
+* [Relatório por fluxo de caixa](outros/relatorio-por-fluxo-de-caixa.md)
 * [Recaptcha](outros/recaptcha.md)
 * [🖱️ Padronização de commit com (Commitlint, Husky e Commitizen)](outros/padronizacao-de-commit-com-commitlint-husky-e-commitizen.md)
 * [🦑 RabbitMQ](outros/rabbitmq.md)
