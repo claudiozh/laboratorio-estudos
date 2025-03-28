@@ -4,7 +4,6 @@ icon: book-open
 
 # Relatório por fluxo de caixa
 
-````
 ```typescript
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -23,28 +22,6 @@ import { TypeDreCategoryEnum } from '@/modules/reports/enums/type-dre-category.e
 import { VisionReportEnum } from '@/modules/reports/enums/vision-report.enum';
 import { groupedPeriod } from '@/modules/reports/use-cases/get-dre-report.usecase';
 
-export interface ISumTransactionsPerDreCategoryOutput {
-  dre_category_id: string;
-  dre_category_type: string;
-  date_group: string;
-  dre_category_alias: string | null;
-  dre_parent_id: string;
-  dre_category_name: string;
-  dre_order: bigint;
-  total: bigint;
-}
-
-export interface IGetSumTransactionPerDreCategoryOutput {
-  dreCategoryAlias: string | null;
-  dreCategoryId: string;
-  dreCategoryName: string;
-  dreCategoryType: string;
-  dreParentId: string;
-  dateGroup: string;
-  dreOrder: number;
-  total: number;
-}
-
 export interface ISumTransactionsByCategoryDatabase {
   category_id: string;
   category_type: string;
@@ -54,11 +31,6 @@ export interface ISumTransactionsByCategoryDatabase {
   invoice_status: string;
   amount_in_cents: bigint;
   paid_amount_in_cents: bigint;
-}
-
-export interface ISumBankAccountBalanceDatabase {
-  date_group: Date;
-  total_initial_balance: bigint;
 }
 
 interface ICategoryReport {
@@ -115,100 +87,10 @@ export interface IReportCashFlow {
   };
 }
 
-export interface ISumTransactionsByCategoryOutput {
-  categoryId: string;
-  categoryType: string;
-  categoryName: string;
-  categoryParentId: string;
-  invoiceStatus: string;
-  dateGroup: string;
-  total: number;
-}
-
-const period: groupedPeriod = {
-  [VisionReportEnum.MONTHLY]: 'month',
-  [VisionReportEnum.YEARLY]: 'year',
-  [VisionReportEnum.QUARTER]: 'quarter',
-  [VisionReportEnum.SEMESTER]: 'semester',
-};
 
 @Injectable()
 export class ReportsRepository {
   constructor(private readonly prismaService: PrismaService) {}
-
-  async getSumTransactionsPerDreCategory({
-    endDate,
-    startDate,
-    vision,
-    type,
-  }: GetDreReportParamsDTO): Promise<IGetSumTransactionPerDreCategoryOutput[]> {
-    const isCashType = type === TypeDreCategoryEnum.CASH_FLOW;
-
-    const sumTransactionsPerCategory = await this.prismaService.$queryRaw<ISumTransactionsPerDreCategoryOutput[]>`
-    -- Busca todas as categorias que possuem transações
-    SELECT 
-        d.id AS dre_category_id,
-        d.type AS dre_category_type,
-        d.alias AS dre_category_alias,
-        d.name AS dre_category_name,
-        d.order AS dre_order,
-        d.dre_parent_id AS dre_parent_id,
-        CASE 
-    WHEN ${period[vision]} = 'semester' THEN 
-        TO_CHAR(t.competition_date, 'YYYY"-"') || LPAD(CAST(FLOOR((EXTRACT(MONTH FROM t.competition_date) - 1) / 6 + 1) AS TEXT), 2, '0')
-    ELSE 
-        TO_CHAR(DATE_TRUNC(${period[vision]}, t.competition_date), 'YYYY-MM-DD')
-    END AS date_group,
-        SUM(t.amount_in_cents) AS total
-    FROM dre_categories d
-    JOIN categories c ON d.id = c.dre_category_id
-    JOIN transactions t ON c.id = t.category_id
-    JOIN invoices i ON t.invoice_id = i.id
-    WHERE t.competition_date BETWEEN ${dateManager(startDate).toDate()} AND ${dateManager(endDate).toDate()}
-    AND (
-        NOT ${isCashType} OR i.status = 'PAID'
-    )
-    GROUP BY date_group, d.id
-    
-    UNION ALL
-  
-    -- Busca todas as categorias da DRE que não possuem transações e força o total para 0
-    SELECT 
-        d.id AS dre_category_id,
-        d.type AS dre_category_type,
-        d.alias AS dre_category_alias,
-        d.name AS dre_category_name,
-        d.order AS dre_order,
-        d.dre_parent_id AS dre_parent_id,
-        NULL AS date_group, 
-        0 AS total
-    FROM dre_categories d
-    WHERE d.id NOT IN (
-        SELECT DISTINCT d.id
-        FROM dre_categories d
-        JOIN categories c ON d.id = c.dre_category_id
-        JOIN transactions t ON c.id = t.category_id
-        JOIN invoices i ON t.invoice_id = i.id
-        WHERE t.competition_date BETWEEN ${dateManager(startDate).toDate()} AND ${dateManager(endDate).toDate()}
-        AND (
-        NOT ${isCashType} OR i.status = 'PAID'
-        ) 
-    )
-    
-    ORDER BY dre_order ASC NULLS LAST;
-  `;
-
-    return sumTransactionsPerCategory.map((value) => ({
-      dreCategoryAlias: value.dre_category_alias,
-      dreCategoryId: value.dre_category_id,
-      dreCategoryName: value.dre_category_name,
-      dreCategoryType: value.dre_category_type,
-      dateGroup: value.date_group,
-      total: Number(value.total),
-      dreParentId: value.dre_parent_id,
-      dreOrder: value.dre_order ? Number(value.dre_order) : null,
-    }));
-  }
 
   async getReportCashFlow(params: GetCashFlowReportParamsDTO): Promise<IReportCashFlow> {
     const { vision, type } = params;
@@ -448,7 +330,271 @@ export class ReportsRepository {
     return reportCashFlow;
   }
 }
-
 ```
-````
+
+{% code title="utils.ts" %}
+```typescript
+import { IReportCashFlow } from '@/modules/database/prisma/repositories/reports.repository';
+import { VisionReportEnum } from '@/modules/reports/enums/vision-report.enum';
+
+interface ICreateInitialValuesCashFlow {
+  startDateToGenerate: Date;
+  startDateToShow: Date;
+  endDate: Date;
+}
+
+const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+const quartesLabels = ['01 Jan à 31 Mar', '01 Abr à 30 Jun', '01 Jul à 30 Set', '01 Out à 31 Dez'];
+const semestersLabels = ['01 Jan à 30 Jun', '01 Jul à 31 Dez'];
+
+export const defaultValuesReportCashFlow: IReportCashFlow[string] = {
+  isToShow: true,
+  isActualPeriod: false,
+  periodGraphic: '',
+  periodTable: '',
+  initialBalanceInCents: 0,
+  ahInitialBalancePaidInCents: 0,
+  ahPreviousBalancePaidInCents: 0,
+  initialBalancePaidInCents: 0,
+  previousBalancePaidInCents: 0,
+  totalGeralInCents: 0,
+  totalBalancesInCents: 0,
+  previousBalanceInCents: 0,
+  ahPreviousBalanceInCents: 0,
+  ahTotalBalancesInCents: 0,
+  ahTotalGeralInCents: 0,
+  ahTotalGeralPaidInCents: 0,
+  ahInitialBalanceInCents: 0,
+  totalGeralPaidInCents: 0,
+  ahTotalBalancesPaidInCents: 0,
+  totalBalancesPaidInCents: 0,
+  totalRecipesInCents: 0,
+  totalRecipesPaidInCents: 0,
+  totalExpensesInCents: 0,
+  totalExpensesPaidInCents: 0,
+  ahTotalRecipesInCents: 0,
+  ahTotalRecipesPaidInCents: 0,
+  ahTotalExpensesInCents: 0,
+  ahTotalExpensesPaidInCents: 0,
+  recipes: [],
+  expenses: [],
+};
+
+export const getMonthlyPeriod = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth(); // Janeiro é 0, Fevereiro é 1, etc.
+  const monthLabel = months[month];
+
+  return {
+    periodGraphic: `${monthLabel}/${year}`,
+    periodTable: `${monthLabel} de ${year}`,
+    periodKey: `monthly-${year}-${String(month + 1).padStart(2, '0')}`,
+  };
+};
+
+export const getQuarterlyPeriod = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const quarter = Math.ceil((month + 1) / 3); // 1-3 para 1º tri, 4-6 para 2º tri, etc.
+
+  return {
+    periodGraphic: `${quarter}º tri/${String(year).slice(-2)}`,
+    periodTable: `${quartesLabels[quarter - 1]} (${year})`,
+    periodKey: `quarterly-${quarter}/${year}`,
+  };
+};
+
+export const getSemesterPeriod = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const semester = Math.ceil((month + 1) / 6); // 1-6 para 1º sem, 7-12 para 2º sem, etc.
+
+  return {
+    periodGraphic: `${semester}º sem/${String(year).slice(-2)}`,
+    periodTable: `${semestersLabels[semester - 1]} (${year})`,
+    periodKey: `semester-${semester}/${year}`,
+  };
+};
+
+export const getYearlyPeriod = (date: Date) => {
+  const year = date.getFullYear();
+
+  return {
+    periodGraphic: year.toString(),
+    periodTable: year.toString(),
+    periodKey: `yearly-${year}`,
+  };
+};
+
+export const getFormattedPeriodByVision = (date: Date, vision: VisionReportEnum) => {
+  switch (vision) {
+    case VisionReportEnum.MONTHLY:
+      return getMonthlyPeriod(date);
+    case VisionReportEnum.QUARTER:
+      return getQuarterlyPeriod(date);
+    case VisionReportEnum.SEMESTER:
+      return getSemesterPeriod(date);
+    case VisionReportEnum.YEARLY:
+      return getYearlyPeriod(date);
+    default:
+      throw new Error('Visão inválida');
+  }
+};
+
+export const createInitialValuesCashFlowByMonth = (params: ICreateInitialValuesCashFlow): IReportCashFlow => {
+  const { startDateToGenerate, startDateToShow, endDate } = params;
+  const initialValues: IReportCashFlow = {};
+
+  const startYear = startDateToGenerate.getFullYear();
+  const startMonth = startDateToGenerate.getMonth() + 1;
+
+  const endYear = endDate.getFullYear();
+  const endMonth = endDate.getMonth() + 1;
+
+  const currentDate = new Date();
+  const { periodKey: periodKeyCurrentDate } = getMonthlyPeriod(currentDate);
+
+  for (let year = startYear; year <= endYear; year++) {
+    const monthStart = year === startYear ? startMonth : 1;
+    const monthEnd = year === endYear ? endMonth : 12;
+
+    for (let month = monthStart; month <= monthEnd; month++) {
+      const date = new Date(year, month - 1, 1);
+      const { periodGraphic, periodTable, periodKey } = getMonthlyPeriod(date);
+
+      initialValues[periodKey] = {
+        ...defaultValuesReportCashFlow,
+        isToShow: date >= startDateToShow && date <= endDate,
+        isActualPeriod: periodKey === periodKeyCurrentDate,
+        periodGraphic: `${periodGraphic}`,
+        periodTable: `${periodTable}`,
+      };
+    }
+  }
+
+  return initialValues;
+};
+
+export const createInitialValuesCashFlowByQuarter = (params: ICreateInitialValuesCashFlow): IReportCashFlow => {
+  const { startDateToGenerate, startDateToShow, endDate } = params;
+  const initialValues: IReportCashFlow = {};
+
+  const startYear = startDateToGenerate.getFullYear();
+  const startMonth = Math.floor(startDateToGenerate.getMonth() / 3) + 1;
+
+  const endYear = endDate.getFullYear();
+  const endMonth = Math.floor(endDate.getMonth() / 3) + 1;
+
+  const currentDate = new Date();
+  const { periodKey: periodKeyCurrentDate } = getQuarterlyPeriod(currentDate);
+
+  for (let year = startYear; year <= endYear; year++) {
+    const trimesterStart = year === startYear ? startMonth : 1;
+    const trimesterEnd = year === endYear ? endMonth : 4;
+
+    for (let trimester = trimesterStart; trimester <= trimesterEnd; trimester++) {
+      const date = new Date(year, (trimester - 1) * 3, 1);
+      const endDateTrimester = new Date(year, (trimester - 1) * 3 + 2, 31);
+      const { periodGraphic, periodTable, periodKey } = getQuarterlyPeriod(date);
+
+      initialValues[periodKey] = {
+        ...defaultValuesReportCashFlow,
+        isToShow: endDateTrimester >= startDateToShow && endDateTrimester <= endDate,
+        isActualPeriod: periodKey === periodKeyCurrentDate,
+        periodGraphic: `${periodGraphic}`,
+        periodTable: `${periodTable}`,
+      };
+    }
+  }
+
+  return initialValues;
+};
+
+export const createInitialValuesCashFlowBySemester = (params: ICreateInitialValuesCashFlow): IReportCashFlow => {
+  const { startDateToGenerate, startDateToShow, endDate } = params;
+  const initialValues: IReportCashFlow = {};
+
+  const startYear = startDateToGenerate.getFullYear();
+  const startMonth = Math.floor(startDateToGenerate.getMonth() / 6) + 1;
+
+  const endYear = endDate.getFullYear();
+  const endMonth = Math.floor(endDate.getMonth() / 6) + 1;
+
+  const currentDate = new Date();
+  const { periodKey: periodKeyCurrentDate } = getSemesterPeriod(currentDate);
+
+  for (let year = startYear; year <= endYear; year++) {
+    const semesterStart = year === startYear ? startMonth : 1;
+    const semesterEnd = year === endYear ? endMonth : 2;
+
+    for (let semester = semesterStart; semester <= semesterEnd; semester++) {
+      const date = new Date(year, (semester - 1) * 6, 1);
+      const endDateSemester = new Date(year, (semester - 1) * 6 + 5, 31);
+      const { periodGraphic, periodTable, periodKey } = getSemesterPeriod(date);
+
+      initialValues[periodKey] = {
+        ...defaultValuesReportCashFlow,
+        isToShow: endDateSemester >= startDateToShow && endDateSemester <= endDate,
+        isActualPeriod: periodKey === periodKeyCurrentDate,
+        periodGraphic: `${periodGraphic}`,
+        periodTable: `${periodTable}`,
+      };
+    }
+  }
+
+  return initialValues;
+};
+
+export const createInitialValuesCashFlowByYear = (params: ICreateInitialValuesCashFlow): IReportCashFlow => {
+  const { startDateToGenerate, startDateToShow, endDate } = params;
+  const initialValues: IReportCashFlow = {};
+
+  const startYearToShow = startDateToShow.getFullYear();
+  const startYear = startDateToGenerate.getFullYear();
+  const endYear = endDate.getFullYear();
+
+  const currentDate = new Date();
+
+  for (let year = startYear; year <= endYear; year++) {
+    const date = new Date(year, 0, 1);
+    const dateYear = new Date(date).getFullYear();
+    const { periodGraphic, periodTable, periodKey } = getYearlyPeriod(date);
+
+    initialValues[periodKey] = {
+      ...defaultValuesReportCashFlow,
+      isToShow: dateYear >= startYearToShow && dateYear <= endYear,
+      isActualPeriod: currentDate.getFullYear() === year,
+      periodGraphic: `${periodGraphic}`,
+      periodTable: `${periodTable}`,
+    };
+  }
+
+  return initialValues;
+};
+
+export const createInitialValuesCashFlowReport = (vision: VisionReportEnum, dates: ICreateInitialValuesCashFlow) => {
+  switch (vision) {
+    case VisionReportEnum.MONTHLY:
+      return createInitialValuesCashFlowByMonth(dates);
+    case VisionReportEnum.QUARTER:
+      return createInitialValuesCashFlowByQuarter(dates);
+    case VisionReportEnum.SEMESTER:
+      return createInitialValuesCashFlowBySemester(dates);
+    case VisionReportEnum.YEARLY:
+      return createInitialValuesCashFlowByYear(dates);
+    default:
+      return createInitialValuesCashFlowByMonth(dates);
+  }
+};
+
+export const calcAHPercent = (value: number, previousValue: number) => {
+  if (value === 0) return 0;
+  if (previousValue === 0) return 100;
+
+  const ah = ((value - previousValue) / previousValue) * 100;
+
+  return Number(ah.toFixed(2));
+};
+```
+{% endcode %}
 
