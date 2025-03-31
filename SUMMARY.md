@@ -98,3 +98,7 @@
 * [🔐 Instalar keepassxc](outros/instalar-keepassxc.md)
 * [💡 Ferramentas para usar no trabalho](outros/ferramentas-para-usar-no-trabalho.md)
 * [📄 Paginação Eficiente: Offset vs Cursor pagination](outros/paginacao-eficiente-offset-vs-cursor-pagination.md)
+
+## Artigos MEDIUM
+
+* [Como dimensionar um aplicativo Node.js para alto tráfego](artigos-medium/como-dimensionar-um-aplicativo-node.js-para-alto-trafego.md)
