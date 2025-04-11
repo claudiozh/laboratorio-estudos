@@ -103,3 +103,5 @@
 
 * [Como dimensionar um aplicativo Node.js para alto tráfego](artigos-medium/como-dimensionar-um-aplicativo-node.js-para-alto-trafego.md)
 * [Node.js Security Best Practices](artigos-medium/node.js-security-best-practices.md)
+* [💻 Escalando de forma mais inteligente: segredos da arquitetura Node.js que todo desenvolvedor sênior d](artigos-medium/escalando-de-forma-mais-inteligente-segredos-da-arquitetura-node.js-que-todo-desenvolvedor-senior-d.md)
+* [15 prompts avançados do ChatGPT que todo desenvolvedor precisa conhecer](artigos-medium/15-prompts-avancados-do-chatgpt-que-todo-desenvolvedor-precisa-conhecer.md)

@@ -1,4 +1,5 @@
 ---
+icon: key
 layout:
   title:
     visible: true
