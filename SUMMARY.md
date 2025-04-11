@@ -102,3 +102,4 @@
 ## Artigos MEDIUM
 
 * [Como dimensionar um aplicativo Node.js para alto tráfego](artigos-medium/como-dimensionar-um-aplicativo-node.js-para-alto-trafego.md)
+* [Node.js Security Best Practices](artigos-medium/node.js-security-best-practices.md)
