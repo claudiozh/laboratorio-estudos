@@ -55,6 +55,7 @@
 * [🔍 Consultas JSON no postgres](database/consultas-json-no-postgres.md)
 * [➕ Insert em uma tabela A, com dados de uma tabela B](database/insert-em-uma-tabela-a-com-dados-de-uma-tabela-b.md)
 * [🌟 Select para trazer todas as colunas da base de dados](database/select-para-trazer-todas-as-colunas-da-base-de-dados.md)
+* [😎 Criando usuário readonly no postgres](database/criando-usuario-readonly-no-postgres-1.md)
 
 ## React - NextJS
 
