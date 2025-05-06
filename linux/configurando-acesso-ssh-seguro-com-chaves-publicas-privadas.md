@@ -20,7 +20,7 @@ Este guia ensina a configurar o acesso SSH seguro usando autenticação por chav
 Abra o terminal da sua máquina local e execute:
 
 ```bash
-ssh-keygen -t rsa -b 4096 -f ~/.secrets/ssh-keys/tarelo-web
+ssh-keygen -t rsa -b 4096 -f ~/.secrets/ssh-keys/nome-aplicacao
 ```
 
 * Pressione **Enter** para aceitar o caminho e nome sugerido para os arquivos de chave.
@@ -28,8 +28,8 @@ ssh-keygen -t rsa -b 4096 -f ~/.secrets/ssh-keys/tarelo-web
 
 > 🔒 **Dica**: As chaves serão salvas:
 >
-> * **Pública**: `~/.secrets/ssh-keys/tarelo-web.pub`
-> * **Privada**: `~/.secrets/ssh-keys/tarelo-web`\
+> * **Pública**: `~/.secrets/ssh-keys/nome-aplicacao.pub`
+> * **Privada**: `~/.secrets/ssh-keys/nome-aplicacao-web`\
 >   Proteja bem o arquivo da chave privada!
 
 ***
@@ -39,10 +39,10 @@ ssh-keygen -t rsa -b 4096 -f ~/.secrets/ssh-keys/tarelo-web
 Agora envie sua chave pública para o servidor com o comando abaixo:
 
 ```bash
-ssh-copy-id -i ~/.secrets/ssh-keys/tarelo-web.pub evocorp@tarelo.site
+ssh-copy-id -i ~/.secrets/ssh-keys/tarelo-web.pub user@ip
 ```
 
-* **Substitua** `evocorp@tarelo.site` pelo usuário e domínio/IP do seu servidor.
+* **Substitua** `user@ip` pelo usuário e domínio/IP do seu servidor.
 * Será solicitada a senha do usuário remoto (**não é a senha da chave**). Digite-a para autorizar a cópia da chave.
 
 > 🔄 **Alternativa**:\
@@ -59,7 +59,7 @@ ssh-copy-id -i ~/.secrets/ssh-keys/tarelo-web.pub evocorp@tarelo.site
 Agora que a chave pública está no servidor, conecte-se sem precisar digitar a senha do servidor:
 
 ```bash
-ssh -i ~/.secrets/ssh-keys/tarelo-web evocorp@tarelo.site
+ssh -i ~/.secrets/ssh-keys/nome-aplicacao user@ipd
 ```
 
 * Será solicitada a **senha da chave privada** que você definiu no Passo 1.
