@@ -1,18 +1,4 @@
----
-layout:
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
----
-
-# ⌨ Comandos docker
+# ⌨️ Comandos docker
 
 ### **Comandos relacionados às informações**
 
@@ -138,7 +124,11 @@ docker logs -f NOME_CONTAINER --tail NUMERO_DE_LINHA_LOGS
 
 * `docker-compose build` - Realiza o build dos serviços relacionados ao arquivo docker-compose.yml, assim como verifica a sua sintaxe.
 * `docker-compose up` - Sobe todos os containers relacionados ao docker-compose, desde que o build já tenha sido executado.
-* `docker-compose down` - Para todos os serviços em execução que estejam relacionados ao arquivo docker-compose.yml.
+* `docker-compose down` - Para todos os serviços em execução que estejam relacionados ao arquivo docker-compose.yml.&#x20;
+
+### Deixar somente as ultimas
+
+* docker images docker.tarelo.app/core-be --format "\{{.ID\}}" | tail -n +5 | xargs docker rmi
 
 ### **Outros**
 
