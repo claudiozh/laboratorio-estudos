@@ -1,135 +1,285 @@
 # ⌨️ Comandos docker
 
-### **Comandos relacionados às informações**
+Um “cheat sheet” de comandos Docker para o dia a dia.
+
+Use placeholders para adaptar rápido:
+
+* `<CONTAINER_ID>` / `<CONTAINER_NAME>`
+* `<IMAGE>` (ex.: `nginx`) e `<IMAGE:TAG>` (ex.: `nginx:alpine`)
+* `<HOST_PORT>:<CONTAINER_PORT>` (ex.: `8080:80`)
+* `<NETWORK>`
+* `<PATH_LOCAL>:<PATH_CONTAINER>`
+
+### Informações e inspeção
 
 <details>
 
-<summary>Exibe a versão do docker que está instalada</summary>
+<summary>Ver versão do Docker</summary>
 
-{% code overflow="wrap" %}
-```docker
+```bash
 docker version
 ```
-{% endcode %}
 
 </details>
 
 <details>
 
-<summary>Retorna diversas informações sobre o container</summary>
+<summary>Listar containers em execução</summary>
 
-{% code overflow="wrap" %}
-```docker
-docker inspect ID_CONTAINER
+```bash
+docker ps
 ```
-{% endcode %}
 
 </details>
 
 <details>
 
-<summary>Exibe todos os containers em execução no momento</summary>
+<summary>Listar todos os containers (inclusive parados)</summary>
 
-{% code overflow="wrap" %}
-```
-docker ps 
-```
-{% endcode %}
-
-</details>
-
-<details>
-
-<summary>Exibe todos os containers, independentemente de estarem em execução ou não</summary>
-
-{% code overflow="wrap" %}
-```
+```bash
 docker ps -a
 ```
-{% endcode %}
 
 </details>
 
 <details>
 
-<summary>Exibe todas as image none</summary>
+<summary>Inspecionar detalhes de um container</summary>
 
-{% code overflow="wrap" %}
+```bash
+docker inspect <CONTAINER_ID>
 ```
-docker image ls -f 'dangling=true'
-```
-{% endcode %}
 
 </details>
 
 <details>
 
-<summary>Exibe os logs do container e limita a quantidade de linhas a exibir.</summary>
+<summary>Ver logs (seguindo) e limitar linhas</summary>
 
-{% code overflow="wrap" %}
+```bash
+docker logs -f <CONTAINER_NAME> --tail <N>
 ```
-docker logs -f NOME_CONTAINER --tail NUMERO_DE_LINHA_LOGS
-```
-{% endcode %}
 
 </details>
 
-### **Comandos relacionados à execução**
+### Rodar containers (`docker run`)
 
-* `docker run NOME_DA_IMAGEM` - cria um container com a respectiva imagem passada como parâmetro.
-* `docker run -it NOME_DA_IMAGEM` - entra dentro da imagem buildada.
-* `docker run -d -P --name NOME dockersamples/static-site` - ao executar, dá um nome ao container e define uma porta aleatória.
-* `docker run -d -p 12345:80 dockersamples/static-site` - define uma porta específica para ser atribuída à porta 80 do container, neste caso 12345.
-* `docker run -v "CAMINHO_VOLUME" NOME_DA_IMAGEM` - cria um volume no respectivo caminho do container.
-* `docker run -it --name NOME_CONTAINER --network NOME_DA_REDE NOME_IMAGEM` - cria um container especificando seu nome e qual rede deverá ser usada.
-* `docker run --rm -it -v $(pwd)/pasta:/volume-container NOME_IMAGEM` - Roda uma imagem e compartilha o volume.
-* `--rm` - A flag --rm é para quando a aplicação parar o container ser removido.
-* `-d` - A flag -b usada para rodar o container em modo detashed, ou seja ao rodar `docker run -d -p 80:80 nginx` por exemplo, o terminal que você rodar esse comando não ficará preso
-* `-t` - A flag -t é para nomear a sua imagem com base no seu dockerfile.
-* `docker build -t TAG_DA_SUA_IMAGEM PATH_DOCKERFILE`
-  * Ex.: docker build -t claudiozh/nginx-com-vim .
+#### Exemplos comuns
 
-### **Comandos relacionados à inicialização/interrupção**
+*   Rodar um container:
 
-* `docker start ID_CONTAINER` - inicia o container com id em questão.
-* `docker start -a -i ID_CONTAINER` - inicia o container com id em questão e integra os terminais, além de permitir interação entre ambos.
-* `docker stop ID_CONTAINER` - interrompe o container com id em questão.
-* `docker stop $(docker ps -aq)` - para todos os containers
-* `docker builder prune` - limpa o cache do builder
+    ```bash
+    docker run <IMAGE:TAG>
+    ```
+*   Modo interativo (terminal):
 
-### **Comandos relacionados à remoção**
+    ```bash
+    docker run -it <IMAGE:TAG>
+    ```
+*   Rodar em background (detached):
 
-* `docker rm ID_CONTAINER` - remove o container com id em questão.
-* `docker container prune` - remove todos os containers que estão parados.
-* `docker rmi NOME_DA_IMAGEM` - remove a imagem passada como parâmetro.
-* `docker ps -q` - exibe somente os ids dos containers
-* `docker stop $(docker ps -q)` - para todos os containers.
-* `docker image rm $(docker image ls -f 'dangling=true' -q)` - remove tosdas as imagens none
-* `docker rmi $(docker images -a -q) -f` - remove todas as imagens
-* `docker rmi $(docker images --filter "dangling=true" -q --no-trunc)` - remove imagens none
-* `docker rm $(docker ps -aq)` remove todos os containers
+    ```bash
+    docker run -d <IMAGE:TAG>
+    ```
+*   Dar nome ao container:
 
-### **Comandos relacionados ao Docker Hub**
+    ```bash
+    docker run --name <CONTAINER_NAME> <IMAGE:TAG>
+    ```
+*   Publicar porta específica:
 
-* `docker login` - inicia o processo de login no Docker Hub.
-* `docker push NOME_USUARIO/NOME_IMAGEM` - envia a imagem criada para o Docker Hub.
-* `docker pull NOME_USUARIO/NOME_IMAGEM` - baixa a imagem desejada do Docker Hub
+    ```bash
+    docker run -p <HOST_PORT>:<CONTAINER_PORT> <IMAGE:TAG>
+    ```
+*   Publicar porta aleatória (para todas as `EXPOSE`):
 
-### **Comandos relacionados à rede**
+    ```bash
+    docker run -P <IMAGE:TAG>
+    ```
+*   Montar volume:
 
-* `hostname -i` - mostra o ip atribuído ao container pelo docker (funciona apenas dentro do container).
-* `docker network create --driver bridge NOME_DA_REDE` - cria uma rede especificando o driver desejado.
+    ```bash
+    docker run -v <PATH_LOCAL>:<PATH_CONTAINER> <IMAGE:TAG>
+    ```
+*   Usar rede específica:
 
-### **Comandos relacionados ao docker-compose**
+    ```bash
+    docker run --network <NETWORK> <IMAGE:TAG>
+    ```
+*   Remover o container ao parar:
 
-* `docker-compose build` - Realiza o build dos serviços relacionados ao arquivo docker-compose.yml, assim como verifica a sua sintaxe.
-* `docker-compose up` - Sobe todos os containers relacionados ao docker-compose, desde que o build já tenha sido executado.
-* `docker-compose down` - Para todos os serviços em execução que estejam relacionados ao arquivo docker-compose.yml.&#x20;
+    ```bash
+    docker run --rm <IMAGE:TAG>
+    ```
 
-### Deixar somente as ultimas
+#### Flags mais usadas (resumo)
 
-* docker images docker.tarelo.app/core-be --format "\{{.ID\}}" | tail -n +5 | xargs docker rmi
+* `-d`: roda em background.
+* `-i`: mantém STDIN aberto.
+* `-t`: aloca um pseudo-TTY.
+* `-it`: combinação comum para “entrar” no container.
+* `--rm`: remove o container ao finalizar.
+* `--name`: define nome do container.
+* `-p`: mapeia porta host:container.
+* `-P`: mapeia portas aleatórias (para portas expostas).
+* `-v`: monta volume (host:container).
+* `--network`: conecta em uma rede.
 
-### **Outros**
+### Build de imagens (`docker build`)
 
-* `chown -Rf 1000:1000 NOME_DIRETORIO/` - Dá permissão de escrita e leitura dentro do container
+```bash
+docker build -t <IMAGE:TAG> .
+```
+
+Exemplo:
+
+```bash
+docker build -t claudiozh/nginx-com-vim:latest .
+```
+
+### Iniciar e parar containers
+
+*   Iniciar:
+
+    ```bash
+    docker start <CONTAINER_ID>
+    ```
+*   Iniciar e anexar ao terminal:
+
+    ```bash
+    docker start -ai <CONTAINER_ID>
+    ```
+*   Parar:
+
+    ```bash
+    docker stop <CONTAINER_ID>
+    ```
+*   Parar todos:
+
+    ```bash
+    docker stop $(docker ps -q)
+    ```
+
+### Remover e limpar
+
+*   Remover container:
+
+    ```bash
+    docker rm <CONTAINER_ID>
+    ```
+*   Remover todos os containers parados:
+
+    ```bash
+    docker container prune
+    ```
+*   Remover imagem:
+
+    ```bash
+    docker rmi <IMAGE:TAG>
+    ```
+*   Listar imagens “dangling” (`<none>`):
+
+    ```bash
+    docker image ls -f "dangling=true"
+    ```
+*   Remover imagens “dangling”:
+
+    ```bash
+    docker image rm $(docker image ls -f "dangling=true" -q)
+    ```
+*   Limpar cache do builder:
+
+    ```bash
+    docker builder prune
+    ```
+
+{% hint style="warning" %}
+Os comandos abaixo são destrutivos. Confirme antes de rodar.
+{% endhint %}
+
+*   Remover **todas** as imagens:
+
+    ```bash
+    docker rmi -f $(docker images -aq)
+    ```
+*   Remover **todos** os containers:
+
+    ```bash
+    docker rm -f $(docker ps -aq)
+    ```
+
+### Docker Hub
+
+*   Login:
+
+    ```bash
+    docker login
+    ```
+*   Push:
+
+    ```bash
+    docker push <USER>/<IMAGE:TAG>
+    ```
+*   Pull:
+
+    ```bash
+    docker pull <USER>/<IMAGE:TAG>
+    ```
+
+### Rede
+
+*   Ver IP do container (dentro do container):
+
+    ```bash
+    hostname -i
+    ```
+*   Criar rede bridge:
+
+    ```bash
+    docker network create --driver bridge <NETWORK>
+    ```
+
+### Docker Compose
+
+Se você usa o plugin novo, prefira `docker compose`. Se usa o binário legado, use `docker-compose`.
+
+*   Build:
+
+    ```bash
+    docker compose build
+    ```
+*   Subir:
+
+    ```bash
+    docker compose up
+    ```
+*   Subir em background:
+
+    ```bash
+    docker compose up -d
+    ```
+*   Derrubar:
+
+    ```bash
+    docker compose down
+    ```
+
+### Manter apenas as N últimas imagens de um repositório
+
+Remove imagens antigas de um repositório, mantendo as mais recentes.
+
+{% code title="Exemplo (ajuste o +5 para o número desejado)" overflow="wrap" %}
+```bash
+docker images <REPO> --format "{{.ID}}" | tail -n +5 | xargs -r docker rmi
+```
+{% endcode %}
+
+{% hint style="warning" %}
+Revise o output de `docker images <REPO>` antes. A ordem pode variar por ambiente.
+{% endhint %}
+
+### Permissões (quando precisa ajustar dono/grupo)
+
+```bash
+chown -R 1000:1000 <DIR>/
+```
